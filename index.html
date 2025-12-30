@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Libbey — Senior UX Designer, AI Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="assets/img/stevelibbey.png">
+</head>
+<body>
+    <img src="assets/img/stevelibbey.png" alt="Steve Libbey" class="logo">
+    <div class="site-header"></div>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-text">
+                    <!-- <div class="eyebrow">SENIOR UX DESIGNER / UX ENGINEER</div> -->
+                    <h1>Steve Libbey</h1>
+                    <p class="tagline">Designing AI systems, analytics platforms, and complex data products.</p>
+                    <p class="intro">I'm a senior UX designer and UX engineer who builds production-ready interfaces for technical products. I spent years at T-Mobile designing business intelligence tools, worked on high-traffic government projects like NORAD Tracks Santa, and created data visualization systems for NOAA. I write production code, work directly with engineering teams, and ship features that handle real user complexity.</p>
+                    <div class="quick-links">
+                        <a href="#case-studies" class="btn btn-primary">View Case Studies</a>
+                        <a href="mailto:stevelibbey@gmail.com" class="btn btn-secondary">Get in Touch</a>
+                        <a href="SteveLibbeyCV.pdf" class="btn btn-secondary">CV</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="case-studies" id="case-studies">
+            <div class="section-header">
+                <h2>Selected Work</h2>
+                <span class="count">// Swipe or use arrows</span>
+            </div>
+
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                <!-- Yorick -->
+                <div class="carousel-slide">
+                    <img src="assets/img/yorickscreenshot.png" alt="Yorick" class="case-study-image" onclick="openModal(this)">
+                    <article class="case-study">
+                        <div class="case-study-header">
+                        <div class="case-study-meta">
+                            <span class="meta-tag">AI Writing Assistant</span>
+                            <span class="meta-tag">Product Design</span>
+                            <span class="meta-tag">2024–Present</span>
+                        </div>
+                        <h3>Yorick Writing Studio</h3>
+                        <p class="case-study-intro">Creator and lead designer of an AI-assisted writing system built to preserve the integrity of a writer's voice. Conceived, designed, and prototyped from scratch in response to widespread backlash against AI-generated text and growing distrust from readers and editors.</p>
+                    </div>
+                    <div class="case-study-body">
+                        <div class="outcomes">
+                            <div class="outcome">
+                                <div class="outcome-label">Impact</div>
+                                <div class="outcome-value">Private alpha</div>
+                                <div class="outcome-description">Active development with working writers</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Focus</div>
+                                <div class="outcome-value">Authorship & voice</div>
+                                <div class="outcome-description">Long-form creative workflows</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Scope</div>
+                                <div class="outcome-value">End-to-end</div>
+                                <div class="outcome-description">Concept, UX architecture, interaction design, early implementation</div>
+                            </div>
+                        </div>
+
+                        <div class="challenge-section">
+                            <h4>The Challenge</h4>
+                            <p>As generative AI tools entered creative writing, many optimized for speed and output at the expense of voice. Readers began reacting negatively not just to AI-generated prose, but to the suspicion that a piece might be machine-written. Writers lost trust in the tools and in the work they produced. The challenge was to design an AI system that assists without overwriting authorial intent or encouraging generic text.</p>
+
+                            <h4>Key Design Decisions</h4>
+                            <ul>
+                                <li>Designed the system around preservation of the writer's voice rather than text generation</li>
+                                <li>Avoided default prompt-to-prose flows that encourage copy-paste authorship</li>
+                                <li>Built the experience around structure, revision, and decision-making</li>
+                                <li>Emphasized transparency and user control over "magic" outputs</li>
+                                <li>Treated AI as a collaborator within a workspace, not an authority</li>
+                            </ul>
+
+                            <h4>Technical Implementation</h4>
+                            <p>Designed UX and system behavior in parallel, defining how context and state persist across a writing project. Built production frontend code to validate interaction models and collaborated closely with engineering on feasibility. Implementation details are intentionally private while core ideas remain in development.</p>
+                        </div>
+                        <div class="case-study-artifact">
+                            <img src="assets/img/artifact1.png" alt="Artifact">
+                        </div>
+                    </div>
+                    </article>
+                </div>
+
+                <!-- T-Mobile BI Platform -->
+                <div class="carousel-slide">
+                    <img src="assets/img/SteveLibbey-Portfolio-tmosort.jpg" alt="T-Mobile BI Platform" class="case-study-image" onclick="openModal(this)">
+                    <article class="case-study">
+                        <div class="case-study-header">
+                        <div class="case-study-meta">
+                            <span class="meta-tag">Business Intelligence</span>
+                            <span class="meta-tag">Enterprise Analytics</span>
+                            <span class="meta-tag">2016-2020</span>
+                        </div>
+                        <h3>T-Mobile Internal Sales Application</h3>
+                        <p class="case-study-intro">Senior UX Software Engineer role designing and building Angular-based business intelligence platform used by thousands of management and executive users for data-driven decision making.</p>
+                    </div>
+                    <div class="case-study-body">
+                        <div class="outcomes">
+                            <div class="outcome">
+                                <div class="outcome-label">Scale</div>
+                                <div class="outcome-value">1000s of users</div>
+                                <div class="outcome-description">Management & executive level</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Innovation</div>
+                                <div class="outcome-value">First Agile team</div>
+                                <div class="outcome-description">Template for entire department</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Lifespan</div>
+                                <div class="outcome-value">4 years</div>
+                                <div class="outcome-description">Active production use</div>
+                            </div>
+                        </div>
+
+                        <div class="challenge-section">
+                            <h4>The Challenge</h4>
+                            <p>T-Mobile leadership needed a scalable business intelligence platform that could serve both current reporting needs and adapt to predicted forms of data. Multiple access levels required different views of the same underlying data without creating maintenance nightmares.</p>
+
+                            <h4>Key Design Decisions</h4>
+                            <ul>
+                                <li>Determined user needs across all access levels through stakeholder interviews with leadership</li>
+                                <li>Designed UI that made the app serve both current and predicted data structures</li>
+                                <li>Implemented MVC architecture using Angular for clean separation of concerns</li>
+                                <li>Conceptualized scalable platform to be reused for future internal apps</li>
+                                <li>Led first team to adopt Agile Scrum methodology, which became department standard</li>
+                            </ul>
+
+                            <h4>Technical Implementation</h4>
+                            <p>Built with Angular MVC architecture, designed for maintainability and reusability. Collaborated with data analysts on ongoing upgrades until sunset in 2020. The platform's architecture was reused multiple times for subsequent internal tools.</p>
+                        </div>
+                        <div class="case-study-artifact">
+                            <img src="assets/img/artifact1.png" alt="Artifact">
+                        </div>
+                    </div>
+                    </article>
+                </div>
+
+                <!-- Call Center Performance Platform -->
+                <div class="carousel-slide">
+                    <img src="assets/img/SteveLibbey-Portfolio-tmoshout.jpg" alt="Call Center Performance Platform" class="case-study-image" onclick="openModal(this)">
+                    <article class="case-study">
+                        <div class="case-study-header">
+                        <div class="case-study-meta">
+                            <span class="meta-tag">Performance Analytics</span>
+                            <span class="meta-tag">Employee Tools</span>
+                            <span class="meta-tag">2017</span>
+                        </div>
+                        <h3>Call Center Performance & Coaching Platform</h3>
+                        <p class="case-study-intro">Redesigned the application call center staff used to track progress and predict monthly bonuses, combining data visualization with T-Mobile's energetic culture.</p>
+                    </div>
+                    <div class="case-study-body">
+                        <div class="outcomes">
+                            <div class="outcome">
+                                <div class="outcome-label">User Impact</div>
+                                <div class="outcome-value">Self-service</div>
+                                <div class="outcome-description">Employees predict bonus eligibility</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Management View</div>
+                                <div class="outcome-value">Aggregated stats</div>
+                                <div class="outcome-description">By location and team</div>
+                            </div>
+                        </div>
+
+                        <div class="challenge-section">
+                            <h4>The Challenge</h4>
+                            <p>Care team needed a redesign that maintained T-Mobile's fun, enthusiastic culture while giving employees clear visibility into bonus calculations. Management needed aggregated statistics organized by location. The challenge: make complex performance metrics feel approachable and motivating.</p>
+
+                            <h4>Key Design Decisions</h4>
+                            <ul>
+                                <li>Worked with Java developer to realize dynamic tile function possibilities (interactive gauges, real-time updates)</li>
+                                <li>Designed predictive interface allowing employees to model "what if" scenarios for bonus optimization</li>
+                                <li>Created enthusiasm-driven UI matching call center culture without sacrificing data clarity</li>
+                                <li>Built hierarchical views: individual performance → team → location aggregations</li>
+                            </ul>
+
+                            <h4>Design Philosophy</h4>
+                            <p>Turned dry performance metrics into an engaging, game-like experience. The UI celebrated achievements while providing actionable insights for improvement—reflecting T-Mobile's unique approach to employee motivation.</p>
+                        </div>
+                        <div class="case-study-artifact">
+                            <img src="assets/img/artifact1.png" alt="Artifact">
+                        </div>
+                    </div>
+                    </article>
+                </div>
+
+                <!-- NOAA Salmon Recovery -->
+                <div class="carousel-slide">
+                    <img src="assets/img/SteveLibbey-Portfolio-noaa1.jpg" alt="NOAA Salmon Recovery Tracker" class="case-study-image" onclick="openModal(this)">
+                    <article class="case-study">
+                        <div class="case-study-header">
+                        <div class="case-study-meta">
+                            <span class="meta-tag">Government/Conservation</span>
+                            <span class="meta-tag">Data Systems</span>
+                            <span class="meta-tag">2012</span>
+                        </div>
+                        <h3>NOAA Pacific Coastal Salmon Recovery Fund Tracker</h3>
+                        <p class="case-study-intro">Government conservation project tracking system connecting scientists, policymakers, and students through multi-level data access and visualization.</p>
+                    </div>
+                    <div class="case-study-body">
+                        <div class="outcomes">
+                            <div class="outcome">
+                                <div class="outcome-label">Audience</div>
+                                <div class="outcome-value">Multi-level</div>
+                                <div class="outcome-description">Scientists to students</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Data Handling</div>
+                                <div class="outcome-value">Oracle APEX</div>
+                                <div class="outcome-description">Complex scientific datasets</div>
+                            </div>
+                        </div>
+
+                        <div class="challenge-section">
+                            <h4>The Challenge</h4>
+                            <p>Tracking information for salmon recovery projects required serving vastly different user needs: scientists wanting raw data tables, policymakers needing summaries, and students requiring educational context. Database queries returned massive tables of scientific data that needed progressive disclosure.</p>
+
+                            <h4>Key Design Decisions</h4>
+                            <ul>
+                                <li>Designed familiar webpage interface with intuitive navigation</li>
+                                <li>Built progressive disclosure: summaries in graphics/charts for general users, full scientific data access on demand</li>
+                                <li>Integrated with Oracle database using APEX (HTML/CSS front-end)</li>
+                                <li>Created visualization layer that made complex conservation metrics accessible to non-scientists</li>
+                                <li>Also designed commercial fisherman trading app with regulatory compliance built-in</li>
+                            </ul>
+
+                            <h4>Design Principle</h4>
+                            <p>Don't hide the complexity—layer it. Scientists got their tables, students got their charts, everyone got value from the same underlying data.</p>
+                        </div>
+                        <div class="case-study-artifact">
+                            <img src="assets/img/artifact1.png" alt="Artifact">
+                        </div>
+                    </div>
+                    </article>
+                </div>
+
+                <!-- NORAD Tracks Santa -->
+                <div class="carousel-slide">
+                    <img src="assets/img/SteveLibbey-Portfolio-norad1.jpg" alt="NORAD Tracks Santa" class="case-study-image" onclick="openModal(this)">
+                    <article class="case-study">
+                        <div class="case-study-header">
+                        <div class="case-study-meta">
+                            <span class="meta-tag">High-Traffic</span>
+                            <span class="meta-tag">Responsive Design</span>
+                            <span class="meta-tag">2013-2014</span>
+                        </div>
+                        <h3>NORAD Tracks Santa</h3>
+                        <p class="case-study-intro">Rebuilt holiday multimedia site from scratch after predecessor's indecipherable code caused production bugs. Millions of global users on Christmas Eve.</p>
+                    </div>
+                    <div class="case-study-body">
+                        <div class="outcomes">
+                            <div class="outcome">
+                                <div class="outcome-label">Performance</div>
+                                <div class="outcome-value">Bug-free launch</div>
+                                <div class="outcome-description">After previous year's failures</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Code Quality</div>
+                                <div class="outcome-value">Reusable codebase</div>
+                                <div class="outcome-description">Used for future versions</div>
+                            </div>
+                        </div>
+
+                        <div class="challenge-section">
+                            <h4>The Challenge</h4>
+                            <p>2013 site launched with bugs due to deliberately obfuscated JavaScript. Lead programmer was fired, leaving company scrambling for 2014 deployment. Brought in late in the game to rebuild entire site with weeks to deadline.</p>
+
+                            <h4>Key Design Decisions</h4>
+                            <ul>
+                                <li>Threw out previous year's code completely</li>
+                                <li>Rebuilt from scratch using Bootstrap, jQuery, and Greensock JS for animations</li>
+                                <li>Optimized for performance under massive traffic spikes</li>
+                                <li>Built fully responsive (kids use whatever device they can access)</li>
+                                <li>Created maintainable codebase using well-supported libraries</li>
+                            </ul>
+
+                            <h4>What I Said No To</h4>
+                            <p>Clever code. No custom animation engines, no framework reinvention, no showing off. Used battle-tested libraries and clear documentation so the next person could actually maintain it.</p>
+
+                            <h4>Fun Fact</h4>
+                            <p>When NPR ran the headline "NORAD Tracks Santa Begins with a Typo" for the 2014 launch, I nearly had a heart attack before realizing they meant the 1953 origin story.</p>
+                        </div>
+                        <div class="case-study-artifact">
+                            <img src="assets/img/artifact1.png" alt="Artifact">
+                        </div>
+                    </div>
+                    </article>
+                </div>
+
+                </div>
+            </div>
+
+            <div class="carousel-nav">
+                <button class="carousel-btn" id="prevBtn" onclick="moveCarousel(-1)">← Previous</button>
+                <button class="carousel-btn" id="nextBtn" onclick="moveCarousel(1)">Next →</button>
+            </div>
+
+            <div class="carousel-dots" id="carouselDots"></div>
+        </section>
+
+        <!-- Modal -->
+        <div class="modal" id="imageModal" onclick="closeModal()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-content" id="modalContent"></div>
+        </div>
+
+        <section class="remote-work">
+            <h2>How I Work Remotely</h2>
+            <p>I've been designing and building products remotely for years. My process is built for async collaboration, clear documentation, and maintaining signal in distributed teams. I do my best work when I can focus deeply, ship iteratively, and communicate with precision.</p>
+
+            <div class="remote-highlights">
+                <div class="remote-highlight">
+                    <h3>West Coast Hours</h3>
+                    <p>Based in Ojai, California. Overlap with PST/MST teams.</p>
+                </div>
+                <div class="remote-highlight">
+                    <h3>Async-First</h3>
+                    <p>Clear documentation, recorded demos, structured feedback loops.</p>
+                </div>
+                <div class="remote-highlight">
+                    <h3>Ship Quality</h3>
+                    <p>Production-ready designs with technical implementation context.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact">
+            <div class="footer-content">
+                <h2><a href="mailto:stevelibbey@gmail.com" class="contact-link">✉ Let's Talk</a></h2>
+                <p>I'm looking for senior UX or product design roles on AI systems, analytics platforms, or healthcare products. Fully remote, shipping real systems with complex data.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
