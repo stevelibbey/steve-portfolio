@@ -31,6 +31,7 @@ h1, h2, h3 {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     letter-spacing: -0.03em;
+    padding-top:15px;
 }
 
 .container {
@@ -519,7 +520,26 @@ h1 {
     height: auto;
     display: inline-block;
 }
+/*. services section */
 
+/* Services section list styling */
+#services ul {
+  padding-left: 30px;
+  padding-top:5px;
+  list-style-type: square;
+}
+
+#services li, .services-intro p {
+    color: #6876bb !important;
+}
+
+.services-intro {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    max-width: 700px;
+    margin-bottom: 2rem;
+}
 /* Footer */
 footer {
     position: relative;
