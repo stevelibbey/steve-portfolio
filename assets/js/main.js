@@ -38,6 +38,24 @@ function goToSlide(index) {
     currentSlide = index;
     updateCarousel();
 }
+(function () {
+  const els = document.querySelectorAll(".reveal");
+  if (!els.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      }
+    },
+    { threshold: 0.15 }
+  );
+
+  els.forEach((el) => observer.observe(el));
+})();
 
 // Modal functionality
 function openModal(imageElement) {

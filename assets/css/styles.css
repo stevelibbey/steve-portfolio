@@ -683,3 +683,23 @@ footer a {
     z-index: 1000;
     transition: width 0.1s ease;
 }
+/* Scroll-reveal animation using existing fadeInUp */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.reveal.is-visible {
+  animation: fadeInUp 0.8s ease-out both;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
