@@ -35,15 +35,14 @@ I design and ship data-intensive platforms and high-stakes interfaces, translati
 
 <section class="case-studies" id="case-studies">
   <div class="section-header">
-    <h2 class="reveal" style="--delay: 0s;">Selected Platform Work</h2>
+    <h2 class="reveal" style="--delay: 0s;">Selected Case Studies</h2>
     <span class="count reveal" style="--delay: 0.08s;">// Swipe or use arrows</span>
   </div>
 
   <div class="carousel-container reveal" style="--delay: 0.16s;">
                 <div class="carousel-track" id="carouselTrack">
 
-
-                <!-- T-Mobile BI Platform -->
+                    <!-- T-Mobile BI Platform -->
                 <div class="carousel-slide">
                     <img src="assets/img/SteveLibbey-Portfolio-tmosort.jpg" alt="T-Mobile BI Platform" class="case-study-image" onclick="openModal(this)">
                     <article class="case-study">
@@ -145,6 +144,121 @@ I design and ship data-intensive platforms and high-stakes interfaces, translati
                         </div>
                     </div>
                     </article>
+                </div>
+
+                <!-- Pedi Crisis App, Summary Card -->
+                <div class="carousel-slide">
+                <img src="assets/img/SteveLibbey-Portfolio-PEDI.png" alt="Pediatric Crisis Decision Support System" class="case-study-image" onclick="openModal(this)">
+                <article class="case-study">
+                    <div class="case-study-header">
+                        <div class="case-study-meta">
+                            <span class="meta-tag">Healthcare</span>
+                            <span class="meta-tag">Clinical Decision Support</span>
+                            <span class="meta-tag">2012-2013</span>
+                        </div>
+                        <h3>Pediatric Crisis Decision Support System</h3>
+                        <p class="case-study-intro">Designed a mobile cognitive aid for pediatric anesthesia emergencies, translating clinical crisis protocols into interactive treatment algorithms for iOS and Windows 8 tablets.</p>
+                    </div>
+                    <div class="case-study-body">
+                        <div class="outcomes">
+                            <div class="outcome">
+                                <div class="outcome-label">Platforms</div>
+                                <div class="outcome-value">iOS + Windows 8</div>
+                                <div class="outcome-description">Cross-platform clinical deployment</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Use Case</div>
+                                <div class="outcome-value">OR emergencies</div>
+                                <div class="outcome-description">Decision support under stress</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Core Function</div>
+                                <div class="outcome-value">Interactive algorithms</div>
+                                <div class="outcome-description">Weight-based dosing and treatment guidance</div>
+                            </div>
+                        </div>
+
+                        <div class="challenge-section">
+                            <h4>The Challenge</h4>
+                            <p>Operating room emergencies are rare, fast-moving, and high risk. In pediatric anesthesia, clinicians must diagnose, treat, and coordinate as a team while managing weight-based dosing and rapidly changing conditions. Printed references were too slow, and even experienced providers can miss steps when cognitive load spikes.</p>
+
+                            <h4>Key Design Decisions</h4>
+                            <ul>
+                                <li>Translated paper crisis protocols into interactive algorithm flows clinicians could follow in real time</li>
+                                <li>Structured each event around the same pattern: event selection, recognition, treatment, dosing, escalation, and resolution</li>
+                                <li>Designed weight capture as a persistent system input so medication guidance stayed relevant throughout the workflow</li>
+                                <li>Used clear checklist interactions and progressive disclosure to reduce cognitive overload during emergencies</li>
+                                <li>Maintained the same clinical workflow across iOS and Windows 8 while adapting to each platform's interaction model</li>
+                            </ul>
+
+                            <h4>Design Principle</h4>
+                            <p>Do not ask clinicians to remember the protocol. Put the protocol in the interface, keep it structured, and make the next step obvious.</p>
+                        </div>
+                        
+                    </div>
+                </article>
+                </div>
+
+                <!-- Pedi Crisis App, Expanded Case Study -->
+                <div class="carousel-slide">
+                <img src="assets/img/Screen5.jpg" alt="Pedi Crisis treatment workflow detail" class="case-study-image" onclick="openModal(this)">
+                <article class="case-study">
+                    <div class="case-study-header">
+                        <div class="case-study-meta">
+                            <span class="meta-tag">Human Factors</span>
+                            <span class="meta-tag">Cross-Platform UX</span>
+                            <span class="meta-tag">Clinical Systems</span>
+                        </div>
+                        <h3>Pedi Crisis, Protocol to Interface</h3>
+                        <p class="case-study-intro">This project was more than a medical app. It was a clinical decision support system that converted pediatric emergency protocols into a usable crisis workflow for the operating room.</p>
+                    </div>
+                    <div class="case-study-body">
+                        <div class="outcomes">
+                            <div class="outcome">
+                                <div class="outcome-label">Workflow</div>
+                                <div class="outcome-value">Algorithm-driven</div>
+                                <div class="outcome-description">Recognition to treatment to escalation</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Safety Support</div>
+                                <div class="outcome-value">Checklist model</div>
+                                <div class="outcome-description">Reduced memory burden in crisis</div>
+                            </div>
+                            <div class="outcome">
+                                <div class="outcome-label">Process</div>
+                                <div class="outcome-value">Clinician-informed</div>
+                                <div class="outcome-description">Refined through review and change logs</div>
+                            </div>
+                        </div>
+
+                        <div class="challenge-section">
+                            <h4>What I Designed</h4>
+                            <p>The system guided clinicians through a repeatable emergency workflow: select the crisis event, enter patient weight, confirm recognition criteria, follow staged treatment steps, review medication dosing, and move to a common end-of-algorithm review. The structure supported rare but life-threatening pediatric events such as anaphylaxis, bradycardia, hyperkalemia, airway fire, hypoxia, transfusion reactions, and cardiac arrest.</p>
+
+                            <h4>How the System Worked</h4>
+                            <ul>
+                                <li>Converted paper checklists and treatment pathways into interactive Yes/No treatment flows</li>
+                                <li>Kept patient weight visible and editable throughout the experience so dosing stayed accurate</li>
+                                <li>Added a crisis timer to track elapsed time once an algorithm began</li>
+                                <li>Created cross-links between related algorithms for escalation and differential diagnosis</li>
+                                <li>Standardized a shared end-state screen prompting team review, therapy options, ICU transfer, consults, and procedure cancellation decisions</li>
+                                <li>Included action logs, settings, hotline information, and other support features for real-world use</li>
+                            </ul>
+
+                            <h4>Cross-Platform Design</h4>
+                            <p>iOS and Windows 8 required different UI conventions, but the clinical workflow had to remain consistent. I adapted the interface to each platform while preserving the same underlying algorithm structure, navigation logic, and treatment sequence. That meant clinicians could rely on the same mental model regardless of device.</p>
+
+                            <h4>Process and Collaboration</h4>
+                            <p>Process documents show ongoing refinement with clinical stakeholders. Algorithms were revised to improve symptom ordering, simplify navigation, standardize medication units, merge related pathways, and clarify escalation logic. That collaboration shaped not just the screens but the decision model itself.</p>
+
+                            <h4>Why It Matters</h4>
+                            <p>This work sits at the intersection of UX, software, and safety-critical systems. The core challenge was not visual polish. It was making complex medical guidance actionable under pressure, without hiding the underlying clinical logic.</p>
+                        </div>
+                        <div class="case-study-artifact">
+                            <img src="assets/img/Screen9.jpg" alt="Pedi Crisis algorithm and checklist detail">
+                        </div>
+                    </div>
+                </article>
                 </div>
 
                 <!-- NOAA Salmon Recovery -->
@@ -266,78 +380,7 @@ I design and ship data-intensive platforms and high-stakes interfaces, translati
             <button class="modal-close" onclick="closeModal()">&times;</button>
             <div class="modal-content" id="modalContent"></div>
         </div>
-<section id="services" class="services">
-  <div class="section-header">
-    <h2 class="reveal" style="--delay: 0s;">Services</h2>
-    <span class="count reveal" style="--delay: 0.08s;">// Fixed scope, fast turnaround</span>
-  </div>
-    <div class="services-intro">
-        <p><strong>I help teams design and deliver complex digital products, especially those involving AI, healthcare, or high-stakes workflows. My work spans product discovery, UX design, AI workflow design, and technical delivery support. Engagements range from focused audits and short-term projects to ongoing advisory roles.</strong></p>
 
-</div>
-  <div class="services-list reveal" style="--delay: 0.16s;">
-    <article class="service">
-      <h3>48-Hour Product and AI Audit</h3>
-      <p><strong>$3,500</strong> · delivered within 48 hours</p>
-      <p>
-        A fast, high-signal review of a workflow, product surface, or AI-assisted interaction.
-        You get a prioritized list of what to fix, what to ignore, and what’s risky.
-      </p>
-      <ul>
-        <li>Review of product, UX, or AI workflows</li>
-        <li>Failure points, risks, and blind spots</li>
-        <li>Prioritized recommendations</li>
-        <li>Concise written assessment</li>
-      </ul>
-    </article>
-
-    <article class="service">
-      <h3>One-Week Sprint</h3>
-      <p><strong>$8,500</strong> · one focused week</p>
-      <p>
-        Embedded support to move one real problem forward.
-        We align on the target, design the fix, and leave you with buildable artifacts.
-      </p>
-      <ul>
-        <li>Problem framing and scope lock</li>
-        <li>Workflow redesign, wireframes, or prototype</li>
-        <li>AI interaction flows and fallbacks as needed</li>
-        <li>End-of-week summary and next steps</li>
-      </ul>
-    </article>
-
-    <article class="service">
-      <h3>Advisory Retainer</h3>
-      <p><strong>$4,000/month</strong></p>
-      <p>
-        Ongoing senior input for teams navigating uncertainty or high-stakes decisions.
-        Useful when you need a second brain, not more meetings.
-      </p>
-      <ul>
-        <li>Decision reviews and second opinions</li>
-        <li>AI UX and risk advisory</li>
-        <li>Async-friendly feedback loops</li>
-        <li>Flexible, time-boxed support</li>
-      </ul>
-    </article>
-  </div>
-
-  <div class="services-notes reveal" style="--delay: 0.24s;">
-    <br/>
-    <p><strong>Engagement notes</strong></p>
-    <ul>
-      <li>Fixed scope. No surprise hours.</li>
-      <li>Remote by default.</li>
-      <li>Work begins after agreement and scheduling.</li>
-      <li>Additional weeks or expanded scope priced separately.</li>
-    </ul>
-<br/>
-    <div class="quick-links">
-      <a href="mailto:stevelibbey@gmail.com?subject=Services%20Inquiry" class="btn btn-primary">Email me about fit and timing</a>
-      <!-- <a href="#case-studies" class="btn btn-secondary">See the work</a> -->
-    </div>
-  </div>
-</section>
 
         <section class="remote-work">
             <h2>How I Work Remotely</h2>
@@ -346,7 +389,7 @@ I design and ship data-intensive platforms and high-stakes interfaces, translati
             <div class="remote-highlights">
                 <div class="remote-highlight">
                     <h3>West Coast Hours</h3>
-                    <p>Based in California. Overlap with PST/MST teams.</p>
+                    <p>Based in California. Overlap with PST/MST teams. Can accommodate EST.</p>
                 </div>
                 <div class="remote-highlight">
                     <h3>Async-First</h3>
