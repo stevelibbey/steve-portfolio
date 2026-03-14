@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Steve Libbey — Healthcare UX, Data Visualization, Enterprise Tools</title>
+    <meta name="description" content="Case studies in healthcare UX, clinical decision support, enterprise analytics, data visualization, and complex workflow design by Steve Libbey.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="assets/img/stevelibbey.png">
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="consulting.html">Consulting</a></li>
+
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="SteveLibbeyCV.pdf">CV</a></li>
+                <li><a href="mailto:stevelibbey@gmail.com" aria-label="Email" class="email-icon">&#9993;</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <img src="assets/img/stevelibbey.png" alt="Steve Libbey" class="logo logo-static">
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <div class="container">
+        <div class="page-header page-header--with-image">
+            <div class="page-header-text">
+                <h1>Portfolio</h1>
+                <p>Case studies from two decades of designing healthcare platforms, enterprise analytics tools, clinical decision-support systems, data visualization interfaces, and complex workflow products.</p>
+            </div>
+            <img src="assets/img/artifact1.png" alt="Portfolio" class="page-header-image"/>
+        </div>
+
+        <!-- Pedi Crisis -->
+        <div id="pedi-crisis" class="case-study-full reveal" style="--delay: 0s;">
+            <img src="assets/img/SteveLibbey-Portfolio-PEDI.png" alt="Pedi Crisis pediatric emergency decision support application showing crisis event selection screen" class="case-study-image" onclick="openModal(this)">
+            <article class="case-study">
+                <div class="case-study-header">
+                    <div class="case-study-meta">
+                        <span class="meta-tag">Healthcare</span>
+                        <span class="meta-tag">Clinical Decision Support</span>
+                        <span class="meta-tag">Human Factors</span>
+                        <span class="meta-tag">Cross-Platform UX</span>
+                        <span class="meta-tag">2012&ndash;2013</span>
+                    </div>
+                    <h3>Pediatric Crisis Decision Support System &mdash; Pedi Crisis</h3>
+                    <p class="case-study-intro">In collaboration with Children's Hospital of Philadelphia and the Society for Pediatric Anesthesiologists, I designed a mobile cognitive aid for pediatric anesthesia emergencies, translating clinical crisis protocols into interactive treatment algorithms for iOS and Windows 8 tablets.</p>
+                </div>
+                <div class="case-study-body">
+                    <div class="outcomes">
+                        <div class="outcome">
+                            <div class="outcome-label">Platforms</div>
+                            <div class="outcome-value">iOS + Windows 8</div>
+                            <div class="outcome-description">Cross-platform clinical deployment</div>
+                        </div>
+                        <div class="outcome">
+                            <div class="outcome-label">Use Case</div>
+                            <div class="outcome-value">OR emergencies</div>
+                            <div class="outcome-description">Decision support under stress</div>
+                        </div>
+                        <div class="outcome">
+                            <div class="outcome-label">Core Function</div>
+                            <div class="outcome-value">Interactive algorithms</div>
+                            <div class="outcome-description">Weight-based dosing and treatment guidance</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-section">
+                        <h4>The Challenge</h4>
+                        <p>Operating room emergencies are rare, fast-moving, and high risk. In pediatric anesthesia, clinicians must diagnose, treat, and coordinate as a team while managing weight-based dosing and rapidly changing conditions. Printed references were too slow, and even experienced providers can miss steps when cognitive load spikes.</p>
+
+                        <h4>What I Designed</h4>
+                        <p>The system guided clinicians through a repeatable emergency workflow: select the crisis event, enter patient weight, confirm recognition criteria, follow staged treatment steps, review medication dosing, and move to a common end-of-algorithm review. The structure supported rare but life-threatening pediatric events such as anaphylaxis, bradycardia, hyperkalemia, airway fire, hypoxia, transfusion reactions, and cardiac arrest.</p>
+
+                        <h4>Key Design Decisions</h4>
+                        <ul>
+                            <li>Translated paper crisis protocols into interactive algorithm flows clinicians could follow in real time</li>
+                            <li>Structured each event around the same pattern: event selection, recognition, treatment, dosing, escalation, and resolution</li>
+                            <li>Designed weight capture as a persistent system input so medication guidance stayed relevant throughout the workflow</li>
+                            <li>Used clear checklist interactions and progressive disclosure to reduce cognitive overload during emergencies</li>
+                            <li>Maintained the same clinical workflow across iOS and Windows 8 while adapting to each platform's interaction model</li>
+                        </ul>
+
+                        <h4>How the System Worked</h4>
+                        <ul>
+                            <li>Converted paper checklists and treatment pathways into interactive Yes/No treatment flows</li>
+                            <li>Kept patient weight visible and editable throughout the experience so dosing stayed accurate</li>
+                            <li>Added a crisis timer to track elapsed time once an algorithm began</li>
+                            <li>Created cross-links between related algorithms for escalation and differential diagnosis</li>
+                            <li>Standardized a shared end-state screen prompting team review, therapy options, ICU transfer, consults, and procedure cancellation decisions</li>
+                            <li>Included action logs, settings, hotline information, and other support features for real-world use</li>
+                        </ul>
+
+                        <h4>Cross-Platform Design</h4>
+                        <p>iOS and Windows 8 required different UI conventions, but the clinical workflow had to remain consistent. I adapted the interface to each platform while preserving the same underlying algorithm structure, navigation logic, and treatment sequence. Clinicians could rely on the same mental model regardless of device.</p>
+
+                        <h4>Process and Collaboration</h4>
+                        <p>Algorithms were revised through ongoing collaboration with clinical stakeholders to improve symptom ordering, simplify navigation, standardize medication units, merge related pathways, and clarify escalation logic. That collaboration shaped not just the screens but the decision model itself.</p>
+
+                        <h4>Design Principle</h4>
+                        <p>Do not ask clinicians to remember the protocol. Put the protocol in the interface, keep it structured, and make the next step obvious.</p>
+                    </div>
+                    <div class="case-study-artifact">
+                        <img src="assets/img/Screen5.jpg" alt="Pedi Crisis treatment workflow detail showing interactive algorithm steps" onclick="openModal(this)" style="cursor:pointer;">
+                    </div>
+                    <div class="case-study-artifact">
+                        <img src="assets/img/Screen9.jpg" alt="Pedi Crisis algorithm checklist and dosing detail" onclick="openModal(this)" style="cursor:pointer;">
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- T-Mobile Sales -->
+        <div id="tmo-sales" class="case-study-full reveal" style="--delay: 0s;">
+            <img src="assets/img/SteveLibbey-Portfolio-tmosort.jpg" alt="T-Mobile internal sales analytics business intelligence platform" class="case-study-image" onclick="openModal(this)">
+            <article class="case-study">
+                <div class="case-study-header">
+                    <div class="case-study-meta">
+                        <span class="meta-tag">Business Intelligence</span>
+                        <span class="meta-tag">Enterprise Analytics</span>
+                        <span class="meta-tag">Internal Tools</span>
+                        <span class="meta-tag">2016&ndash;2020</span>
+                    </div>
+                    <h3>T-Mobile Internal Sales Analytics Platform</h3>
+                    <p class="case-study-intro">Senior UX Software Engineer role designing and building an Angular-based business intelligence platform used by thousands of management and executive users for data-driven decision making.</p>
+                </div>
+                <div class="case-study-body">
+                    <div class="outcomes">
+                        <div class="outcome">
+                            <div class="outcome-label">Scale</div>
+                            <div class="outcome-value">1000s of users</div>
+                            <div class="outcome-description">Management &amp; executive level</div>
+                        </div>
+                        <div class="outcome">
+                            <div class="outcome-label">Innovation</div>
+                            <div class="outcome-value">First Agile team</div>
+                            <div class="outcome-description">Template for entire department</div>
+                        </div>
+                        <div class="outcome">
+                            <div class="outcome-label">Lifespan</div>
+                            <div class="outcome-value">4 years</div>
+                            <div class="outcome-description">Active production use</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-section">
+                        <h4>The Challenge</h4>
+                        <p>T-Mobile leadership needed a scalable business intelligence platform that could serve both current reporting needs and adapt to predicted forms of data. Multiple access levels required different views of the same underlying data without creating maintenance nightmares.</p>
+
+                        <h4>Key Design Decisions</h4>
+                        <ul>
+                            <li>Determined user needs across all access levels through stakeholder interviews with leadership</li>
+                            <li>Designed UI that made the app serve both current and predicted data structures</li>
+                            <li>Implemented MVC architecture using Angular for clean separation of concerns</li>
+                            <li>Conceptualized scalable platform to be reused for future internal apps</li>
+                            <li>Led first team to adopt Agile Scrum methodology, which became department standard</li>
+                        </ul>
+
+                        <h4>Technical Implementation</h4>
+                        <p>Built with Angular MVC architecture, designed for maintainability and reusability. Collaborated with data analysts on ongoing upgrades until sunset in 2020. The platform's architecture was reused multiple times for subsequent internal tools.</p>
+                    </div>
+                    <div class="case-study-artifact">
+                        <img src="assets/img/artifact1.png" alt="T-Mobile sales platform design artifact">
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Call Center Performance -->
+        <div id="tmo-coaching" class="case-study-full reveal" style="--delay: 0s;">
+            <img src="assets/img/SteveLibbey-Portfolio-tmoshout.jpg" alt="T-Mobile call center performance and coaching platform" class="case-study-image" onclick="openModal(this)">
+            <article class="case-study">
+                <div class="case-study-header">
+                    <div class="case-study-meta">
+                        <span class="meta-tag">Performance Analytics</span>
+                        <span class="meta-tag">Employee Tools</span>
+                        <span class="meta-tag">Data Visualization</span>
+                        <span class="meta-tag">2017</span>
+                    </div>
+                    <h3>Call Center Performance &amp; Coaching Platform</h3>
+                    <p class="case-study-intro">Redesigned the application call center staff used to track progress and predict monthly bonuses, combining data visualization with T-Mobile's energetic culture.</p>
+                </div>
+                <div class="case-study-body">
+                    <div class="outcomes">
+                        <div class="outcome">
+                            <div class="outcome-label">User Impact</div>
+                            <div class="outcome-value">Self-service</div>
+                            <div class="outcome-description">Employees predict bonus eligibility</div>
+                        </div>
+                        <div class="outcome">
+                            <div class="outcome-label">Management View</div>
+                            <div class="outcome-value">Aggregated stats</div>
+                            <div class="outcome-description">By location and team</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-section">
+                        <h4>The Challenge</h4>
+                        <p>Care team needed a redesign that maintained T-Mobile's fun, enthusiastic culture while giving employees clear visibility into bonus calculations. Management needed aggregated statistics organized by location. The challenge: make complex performance metrics feel approachable and motivating.</p>
+
+                        <h4>Key Design Decisions</h4>
+                        <ul>
+                            <li>Worked with Java developer to realize dynamic tile function possibilities (interactive gauges, real-time updates)</li>
+                            <li>Designed predictive interface allowing employees to model "what if" scenarios for bonus optimization</li>
+                            <li>Created enthusiasm-driven UI matching call center culture without sacrificing data clarity</li>
+                            <li>Built hierarchical views: individual performance → team → location aggregations</li>
+                        </ul>
+
+                        <h4>Design Philosophy</h4>
+                        <p>Turned dry performance metrics into an engaging, game-like experience. The UI celebrated achievements while providing actionable insights for improvement&mdash;reflecting T-Mobile's unique approach to employee motivation.</p>
+                    </div>
+                    <div class="case-study-artifact">
+                        <img src="assets/img/artifact1.png" alt="Call center performance platform design artifact">
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- NOAA -->
+        <div id="noaa" class="case-study-full reveal" style="--delay: 0s;">
+            <img src="assets/img/SteveLibbey-Portfolio-noaa1.jpg" alt="NOAA Pacific Coastal Salmon Recovery Fund data tracking system" class="case-study-image" onclick="openModal(this)">
+            <article class="case-study">
+                <div class="case-study-header">
+                    <div class="case-study-meta">
+                        <span class="meta-tag">Government / Conservation</span>
+                        <span class="meta-tag">Data Systems</span>
+                        <span class="meta-tag">Data Visualization</span>
+                        <span class="meta-tag">2012</span>
+                    </div>
+                    <h3>NOAA Pacific Coastal Salmon Recovery Fund Tracker</h3>
+                    <p class="case-study-intro">Government conservation project tracking system connecting scientists, policymakers, and students through multi-level data access and visualization.</p>
+                </div>
+                <div class="case-study-body">
+                    <div class="outcomes">
+                        <div class="outcome">
+                            <div class="outcome-label">Audience</div>
+                            <div class="outcome-value">Multi-level</div>
+                            <div class="outcome-description">Scientists to students</div>
+                        </div>
+                        <div class="outcome">
+                            <div class="outcome-label">Data Handling</div>
+                            <div class="outcome-value">Oracle APEX</div>
+                            <div class="outcome-description">Complex scientific datasets</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-section">
+                        <h4>The Challenge</h4>
+                        <p>Tracking information for salmon recovery projects required serving vastly different user needs: scientists wanting raw data tables, policymakers needing summaries, and students requiring educational context. Database queries returned massive tables of scientific data that needed progressive disclosure.</p>
+
+                        <h4>Key Design Decisions</h4>
+                        <ul>
+                            <li>Designed familiar webpage interface with intuitive navigation</li>
+                            <li>Built progressive disclosure: summaries in graphics/charts for general users, full scientific data access on demand</li>
+                            <li>Integrated with Oracle database using APEX (HTML/CSS front-end)</li>
+                            <li>Created visualization layer that made complex conservation metrics accessible to non-scientists</li>
+                            <li>Also designed commercial fisherman trading app with regulatory compliance built-in</li>
+                        </ul>
+
+                        <h4>Design Principle</h4>
+                        <p>Don't hide the complexity&mdash;layer it. Scientists got their tables, students got their charts, everyone got value from the same underlying data.</p>
+                    </div>
+                    <div class="case-study-artifact">
+                        <img src="assets/img/artifact1.png" alt="NOAA salmon recovery tracking system artifact">
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- NORAD -->
+        <div id="norad" class="case-study-full reveal" style="--delay: 0s;">
+            <img src="assets/img/SteveLibbey-Portfolio-norad1.jpg" alt="NORAD Tracks Santa responsive holiday website" class="case-study-image" onclick="openModal(this)">
+            <article class="case-study">
+                <div class="case-study-header">
+                    <div class="case-study-meta">
+                        <span class="meta-tag">High-Traffic</span>
+                        <span class="meta-tag">Responsive Design</span>
+                        <span class="meta-tag">Performance</span>
+                        <span class="meta-tag">2013&ndash;2014</span>
+                    </div>
+                    <h3>NORAD Tracks Santa</h3>
+                    <p class="case-study-intro">Rebuilt holiday multimedia site from scratch after predecessor's indecipherable code caused production bugs. Millions of global users on Christmas Eve.</p>
+                </div>
+                <div class="case-study-body">
+                    <div class="outcomes">
+                        <div class="outcome">
+                            <div class="outcome-label">Performance</div>
+                            <div class="outcome-value">Bug-free launch</div>
+                            <div class="outcome-description">After previous year's failures</div>
+                        </div>
+                        <div class="outcome">
+                            <div class="outcome-label">Code Quality</div>
+                            <div class="outcome-value">Reusable codebase</div>
+                            <div class="outcome-description">Used for future versions</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-section">
+                        <h4>The Challenge</h4>
+                        <p>2013 site launched with bugs due to deliberately obfuscated JavaScript. Lead programmer was fired, leaving company scrambling for 2014 deployment. Brought in late in the game to rebuild entire site with weeks to deadline.</p>
+
+                        <h4>Key Design Decisions</h4>
+                        <ul>
+                            <li>Threw out previous year's code completely</li>
+                            <li>Rebuilt from scratch using Bootstrap, jQuery, and Greensock JS for animations</li>
+                            <li>Optimized for performance under massive traffic spikes</li>
+                            <li>Built fully responsive (kids use whatever device they can access)</li>
+                            <li>Created maintainable codebase using well-supported libraries</li>
+                        </ul>
+
+                        <h4>What I Said No To</h4>
+                        <p>Clever code. No custom animation engines, no framework reinvention, no showing off. Used battle-tested libraries and clear documentation so the next person could actually maintain it.</p>
+
+                        <h4>Fun Fact</h4>
+                        <p>When NPR ran the headline "NORAD Tracks Santa Begins with a Typo" for the 2014 launch, I nearly had a heart attack before realizing they meant the 1953 origin story.</p>
+                    </div>
+                    <div class="case-study-artifact">
+                        <img src="assets/img/artifact1.png" alt="NORAD Tracks Santa design artifact">
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="footer-content">
+                <h2><a href="mailto:stevelibbey@gmail.com" class="contact-link">Let's Talk</a></h2>
+                <p>Senior product designer seeking roles in healthcare systems, enterprise analytics, AI-enabled tools, and complex workflow design. Fully remote, based in California.</p>
+                <div class="footer-links">
+                    <a href="mailto:stevelibbey@gmail.com">Email</a>
+                    <a href="https://www.linkedin.com/in/stevelibbey" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="SteveLibbeyCV.pdf">Resume</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div class="modal-content" id="modalContent"></div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
