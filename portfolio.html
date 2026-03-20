@@ -118,6 +118,68 @@
             </article>
         </div>
 
+        <!-- Providence -->
+        <div id="providence" class="case-study-full reveal" style="--delay: 0s;">
+            <img src="assets/img/providence.png" alt="Providence Health System clinical desktop unification project" class="case-study-image" onclick="openModal(this)">
+            <article class="case-study">
+                <div class="case-study-header">
+                    <div class="case-study-meta">
+                        <span class="meta-tag">Healthcare</span>
+                        <span class="meta-tag">Enterprise Workflow</span>
+                        <span class="meta-tag">Constraint Navigation</span>
+                        <span class="meta-tag">2021&ndash;2022</span>
+                    </div>
+                    <h3>Providence Clinical Desktop Unification</h3>
+                    <p class="case-study-intro">At Providence Health System, one of the largest nonprofit health systems in the country, I originated and led a project to reduce the workflow fragmentation that came with decades of hospital acquisitions. The goal was a unified clinical desktop that let administrators and providers manage requests across multiple systems without leaving a single interface.</p>
+                </div>
+                <div class="case-study-body">
+                    <div class="outcomes">
+                        <div class="outcome">
+                            <div class="outcome-label">Environment</div>
+                            <div class="outcome-value">Citrix secured desktop</div>
+                            <div class="outcome-description">Security-perimeter constrained</div>
+                        </div>
+                        <div class="outcome">
+                            <div class="outcome-label">Users</div>
+                            <div class="outcome-value">Admins &amp; providers</div>
+                            <div class="outcome-description">Administrators and clinical providers</div>
+                        </div>
+                        <div class="outcome">
+                            <div class="outcome-label">Problem</div>
+                            <div class="outcome-value">Fragmented workflows</div>
+                            <div class="outcome-description">Multi-app switching across acquired hospital systems</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-section">
+                        <h4>The Challenge</h4>
+                        <p>Providence absorbed over 100 cyberattacks daily. That threat level required keeping the entire clinical desktop inside a Citrix security perimeter. It was the right call. But it meant that Epic, ServiceNow, and a patchwork of other systems inherited from acquired hospitals all lived as separate applications inside a walled garden with no shared layer connecting them.</p>
+                        <p>Administrators bore the heaviest cost. Approving or denying routine requests&mdash;a new computer for cardiology, a schedule change, a supply order&mdash;meant navigating between multiple applications for tasks that should take seconds. Providers had the same problem. Everyone interviewed said the same thing: they wanted one place to handle this, and the constant switching was eating their time.</p>
+
+                        <h4>The Approach</h4>
+                        <p>The director who originated the initiative had prior experience at Citrix and identified a widget feature that could serve as an aggregation layer inside the secured desktop. The idea was to surface consolidated request workflows from Epic, ServiceNow, and other systems inside a single Citrix dashboard, available on login, without requiring users to launch separate applications.</p>
+                        <p>I hired and led the development team, conducted discovery interviews with administrators and providers, and designed the workflow model. Our first test case was administrator request approvals: one interface, one click per request, no app switching.</p>
+
+                        <h4>Where It Broke Down</h4>
+                        <p>Two constraints converged and closed off the path.</p>
+                        <p>The only sanctioned build tool for the Citrix widget was a low-code environment that couldn't support what we were designing. The workaround was to surface a web application inside the widget space, but that created security vulnerabilities the Citrix perimeter existed to prevent. We couldn't use the sanctioned tool and we couldn't safely use the workaround.</p>
+                        <p>While we were working through this, Citrix engineers began signaling informally that the widget feature itself was not long for the platform. Shortly after, it was sunsetted entirely. The one mechanism that could aggregate inside the security boundary was gone.</p>
+
+                        <h4>What We Proposed Instead</h4>
+                        <p>We came back to leadership with an alternative. A standalone web application dashboard with broader scope, designed to span not just the original use cases but the full patchwork of systems across every hospital Providence had acquired. It was technically stronger and more scalable than the original widget approach.</p>
+                        <p>But it couldn't meet the one non-negotiable requirement: available on login, inside the perimeter, without adding another application to the stack. Leadership made the right call and shut the project down. The team was reassigned.</p>
+
+                        <h4>What This Shows</h4>
+                        <p>The problem was real and validated. The approach was sound given the constraints available at the time. The technical path was closed by an external vendor decision, not a design failure. When it closed, we identified an alternative that would have worked in a different environment and were honest about what it couldn't do.</p>
+                        <p>Designing inside a hostile constraint environment, where every integration decision carries a security implication and the vendor landscape can shift under you, is a different discipline than designing for a clean greenfield product. This project was that discipline.</p>
+
+                        <h4>Design Principle</h4>
+                        <p>Know which constraints are load-bearing before you build against them. When the foundation changes, stop, assess what's still possible, and say clearly what isn't.</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+
         <!-- T-Mobile Sales -->
         <div id="tmo-sales" class="case-study-full reveal" style="--delay: 0s;">
             <img src="assets/img/SteveLibbey-Portfolio-tmosort.jpg" alt="T-Mobile internal sales analytics business intelligence platform" class="case-study-image" onclick="openModal(this)">
