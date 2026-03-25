@@ -94,6 +94,10 @@ h1, h2, h3 {
     color: #6876bb;
 }
 
+.site-nav .nav-links a:visited {
+    color: #515c94;
+}
+
 .site-nav .nav-links a:active,
 .site-nav .nav-links a.active {
     color: #ffffff;
@@ -128,8 +132,20 @@ h1, h2, h3 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     z-index: 1000;
     list-style: none;
-    margin-top: 0.5rem;
+    margin-top: 0;
+    padding-top: 0.75rem;
 }
+
+/* Invisible bridge so hover doesn't break between trigger and menu */
+.nav-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 0.5rem;
+}
+
 
 .nav-dropdown:hover .nav-dropdown-menu,
 .nav-dropdown.open .nav-dropdown-menu {
