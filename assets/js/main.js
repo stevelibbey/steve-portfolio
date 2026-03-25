@@ -6,13 +6,30 @@
         toggle.addEventListener('click', function () {
             links.classList.toggle('open');
         });
-        // Close nav when a link is clicked
+        // Close nav when a non-dropdown link is clicked
         links.querySelectorAll('a').forEach(function (a) {
             a.addEventListener('click', function () {
-                links.classList.remove('open');
+                if (!a.closest('.nav-dropdown') || a.closest('.nav-dropdown-menu')) {
+                    links.classList.remove('open');
+                }
             });
         });
     }
+
+    // Mobile: toggle dropdown on tap
+    document.querySelectorAll('.nav-dropdown > a').forEach(function (trigger) {
+        trigger.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                var parent = trigger.parentElement;
+                // Close other dropdowns
+                document.querySelectorAll('.nav-dropdown').forEach(function (d) {
+                    if (d !== parent) d.classList.remove('open');
+                });
+                parent.classList.toggle('open');
+            }
+        });
+    });
 })();
 
 // Carousel functionality (used on portfolio page)
