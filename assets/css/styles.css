@@ -123,13 +123,13 @@ h1, h2, h3 {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(246, 245, 243, 0.98);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
     border-radius: 6px;
     padding: 0.5rem 0;
     min-width: 140px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: none;
     z-index: 1000;
     list-style: none;
     margin-top: 0;
