@@ -1128,6 +1128,15 @@ footer a {
     animation: none;
 }
 
+.service-image {
+  float: right;
+  margin-right: -30px; /* space between text and image */
+  margin-top: -30px; /* optional for vertical spacing */
+  margin-bottom: 60px; /* optional for vertical spacing */
+  max-width: 350px; /* adjust as needed */
+  height: auto;
+}
+
 @keyframes logoFadeInUp {
     from {
         opacity: 0;
