@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noise Gift | Steve Libbey</title>
-    <meta name="description" content="Noise Gift is a research-driven music discovery tool that builds playlists from artist lineages, historical charts, and scenes. Designed by Steve Libbey.">
+    <meta name="description" content="Noise Gift — historically grounded VST instruments and web-based creative tools. Designed by Steve Libbey.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,6 +57,16 @@
             padding-top: 0;
         }
 
+        .project-body h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 1.5rem;
+            margin-bottom: 0.4rem;
+            padding-top: 0;
+        }
+
         .project-body p {
             font-size: 0.95rem;
             color: var(--text-dim);
@@ -73,7 +83,7 @@
         .project-body li {
             padding-left: 1.4rem;
             position: relative;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             font-size: 0.9rem;
             color: var(--text-dim);
             line-height: 1.6;
@@ -85,6 +95,10 @@
             left: 0;
             color: var(--text);
             font-size: 0.8rem;
+        }
+
+        .project-body li.muted {
+            opacity: 0.55;
         }
 
         .project-status-bar {
@@ -114,36 +128,30 @@
             color: var(--text);
         }
 
-        .search-examples {
-            margin: 1.5rem 0 2rem;
-            padding: 1.5rem;
-            background: var(--surface);
-            border-radius: 8px;
-            border-left: 3px solid var(--accent);
-        }
-
-        .search-examples .ex-label {
+        .instrument-note {
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-size: 0.78rem;
             color: var(--text-dim);
-            margin-bottom: 1rem;
+            margin-left: 0.5rem;
+            opacity: 0.7;
         }
 
-        .search-examples ul {
+        .section-divider {
+            border: none;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            margin: 3rem 0;
+        }
+
+        .tool-block {
+            margin-bottom: 1.75rem;
+        }
+
+        .tool-block p {
             margin-bottom: 0;
         }
 
-        .search-examples li {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--text);
-        }
-
-        .search-examples li::before {
-            content: '›';
-            color: var(--accent);
+        .principles-list li::before {
+            content: '—';
         }
     </style>
 </head>
@@ -181,66 +189,105 @@
         <div class="project-page-header">
             <a href="projects.html" class="project-back">Projects</a>
             <div class="case-study-meta" style="margin-bottom: 1rem;">
-                <span class="meta-tag">Music Tool</span>
-                <span class="meta-tag">Research-Driven Discovery</span>
-                <span class="meta-tag">Product Design</span>
+                <span class="meta-tag">VST Instruments</span>
+                <span class="meta-tag">Web Tools</span>
+                <span class="meta-tag">Audio</span>
             </div>
             <h1>Noise Gift</h1>
-            <p class="project-tagline">A research-driven music discovery tool that builds playlists from artist lineages, historical charts, and scenes defined by time and place. No algorithm. No feed.</p>
+            <p class="project-tagline">Historically grounded physical modeling instruments and web-based creative audio tools. Built from primary sources. Anomalies are features.</p>
         </div>
 
         <div class="project-status-bar reveal">
             <div class="psb-item">
-                <div class="psb-label">Type</div>
-                <div class="psb-value">Music tool</div>
+                <div class="psb-label">VST Stack</div>
+                <div class="psb-value">JUCE / C++ / CMake</div>
             </div>
             <div class="psb-item">
-                <div class="psb-label">Model</div>
-                <div class="psb-value">Research-driven</div>
+                <div class="psb-label">Formats</div>
+                <div class="psb-value">VST3 / AU</div>
             </div>
             <div class="psb-item">
-                <div class="psb-label">Output</div>
-                <div class="psb-value">Importable playlists</div>
+                <div class="psb-label">Pricing</div>
+                <div class="psb-value">Buy-once</div>
+            </div>
+            <div class="psb-item">
+                <div class="psb-label">Shared format</div>
+                <div class="psb-value">.ngft</div>
             </div>
         </div>
 
         <div class="project-body">
 
-            <h2>The Problem</h2>
-            <p>Streaming recommendation engines optimize for engagement. They are good at keeping you listening to things you already like. They are not good at helping you find music that connects to something specific — an artist's stated influences, a moment in a city's music history, a scene you read about but never heard.</p>
-            <p>Noise Gift is built for a different kind of curiosity.</p>
+            <!-- VST Suite -->
+            <h2>VST Instrument Suite</h2>
+            <p>Period-accurate physical modeling of rare historical instruments, each built from primary sources — patents, scholarly texts, original schematics — rather than timbral approximation. Demo mode uses instrument-characteristic interruptions rather than generic license prompts.</p>
 
-            <h2>How It Works</h2>
-            <p>Instead of recommending music based on behavior, Noise Gift builds playlists from real-world inputs: artists and the records they explicitly pointed to, historical charts tied to specific dates and locations, and scenes defined by time and place.</p>
-
-            <div class="search-examples reveal">
-                <div class="ex-label">You can search things like</div>
-                <ul>
-                    <li>Tom Waits</li>
-                    <li>Jamaica 1963</li>
-                    <li>Los Angeles punk 1978</li>
-                    <li>Chicago blues 1955</li>
-                    <li>Bristol sound 1994</li>
-                </ul>
-            </div>
-
-            <p>Each search produces a clean, playable playlist that can be exported to services like Apple Music and Spotify.</p>
-
-            <h2>Design Principles</h2>
+            <h3>Completed or fully specced</h3>
             <ul>
-                <li>No accounts, no feeds, no social features — this is a tool, not a platform</li>
-                <li>Results grounded in documented history, not behavioral inference</li>
-                <li>Fast path from idea to something you can hear immediately</li>
-                <li>No algorithmic drift — the same search returns the same kind of result</li>
-                <li>Export-first: the goal is music in your player, not time on the site</li>
+                <li>Sea Organ <span class="instrument-note">tube resonance, stochastic wave generation</span></li>
+                <li>Daxophone <span class="instrument-note">modal blade synthesis, wolf tones preserved</span></li>
+                <li>Audion Piano <span class="instrument-note">1915 heterodyne oscillator, thermal drift</span></li>
+                <li>Telharmonium <span class="instrument-note">additive synthesis, just intonation, telephone wire rolloff</span></li>
+                <li>Elisha Gray Electro-Harmonic Telegraph <span class="instrument-note">odd harmonic additive synthesis</span></li>
+                <li>Staccatone <span class="instrument-note">hard staccato only, no sustain</span></li>
+                <li>Luminaphone <span class="instrument-note">selenium cell fatigue, tempo-synced rotation</span></li>
+                <li>Clavecin Électrique <span class="instrument-note">Leyden jar as sole envelope system</span></li>
+                <li>Sphäraphon <span class="instrument-note">kidney-plate condenser, patent as only timbral ground truth</span></li>
+                <li>Mixtur-Trautonium <span class="instrument-note">Sala's subharmonic divider, four formant filters</span></li>
+                <li>Choralcelo <span class="instrument-note">electromagnetic string excitation, no attack transient by design</span></li>
+                <li>Orchestrion <span class="instrument-note">11-voice mechanical ensemble, Performer and Paper Roll modes</span></li>
             </ul>
 
-            <h2>Why It Exists</h2>
-            <p>Music discovery tools are mostly built around what the algorithm thinks you want next. Noise Gift is built around what you're actually curious about. The difference is whether the tool follows your intent or substitutes its own.</p>
-            <p>That distinction — user intent versus system intent — is the same tension at the center of most AI product design problems. Noise Gift is one place I work through it in a concrete domain.</p>
+            <h3>Still being scoped</h3>
+            <ul>
+                <li>Singing Arc</li>
+                <li>Clavecin Magnétique</li>
+                <li>Rhythmicon <span class="instrument-note">research complete, spec not yet written</span></li>
+            </ul>
 
-            <h2>Current Status</h2>
-            <p>In development. Core search model and playlist generation are functional. Export integration and UI are in progress.</p>
+            <h3>Queued for later</h3>
+            <ul>
+                <li class="muted">Croix Sonore</li>
+                <li class="muted">Severy Sound-Producing Device</li>
+                <li class="muted">Circuit Bending Suite</li>
+            </ul>
+
+            <hr class="section-divider">
+
+            <!-- Web Tools -->
+            <h2>Noise Gift Web Tools</h2>
+            <p>A set of web-based creative tools sharing the <code>.ngft</code> file format for cross-tool compatibility.</p>
+
+            <div class="tool-block">
+                <h3>WORLDMANGLE</h3>
+                <p>Audio mangling driven by real-world data streams: DOW close, geomagnetic index, extinction rates, and a conspiracy belief proxy. Demucs vocal separation, librosa beat slicing. A DOW reading above 50,000 triggers an undocumented behavior change.</p>
+            </div>
+
+            <div class="tool-block">
+                <h3>Driftbook</h3>
+                <p>Visual narrative platform for sequencing images, text overlays, and performance into evolving nonlinear story experiences. Three modes: Studio (authoring), Performance (live projection), Drift (authored nonlinear evolution and recurrence). Sequences loop, branch probabilistically, and evolve across passes while remaining authored and intentional. Built on Next.js, React, TypeScript, and Postgres. MIDI integration and graph-based sequencing in later phases.</p>
+            </div>
+
+            <div class="tool-block">
+                <h3>Driftbook FX</h3>
+                <p>Flipbook-metaphor effects plugin. Up to 20 image frames drive DSP at 30Hz via CoreImage analysis.</p>
+            </div>
+
+            <div class="tool-block">
+                <h3>Driftorama</h3>
+                <p>Live visual audio instrument where illustrated scenes function as the interface. Up to 10 scene elements control audio effects. Performances export as .wav files.</p>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- Principles -->
+            <h2>Shared Principles</h2>
+            <ul class="principles-list">
+                <li>Anomalies are features, not bugs</li>
+                <li>Historical gesture vocabulary drives UI design</li>
+                <li>Physical accuracy over modern synth conventions</li>
+                <li>WORLDMANGLE and Driftorama are the nearest-term demo priorities</li>
+            </ul>
 
         </div>
 
