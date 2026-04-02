@@ -95,7 +95,11 @@ h1, h2, h3 {
 }
 
 .site-nav .nav-links a:visited {
-    color: #515c94;
+    color: #6876bb;
+}
+
+a:visited {
+    color: var(--accent-warm);
 }
 
 .site-nav .nav-links a:active,
