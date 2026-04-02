@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noise Gift | Steve Libbey</title>
+    <meta name="description" content="Noise Gift is a research-driven music discovery tool that builds playlists from artist lineages, historical charts, and scenes. Designed by Steve Libbey.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="assets/img/stevelibbey.png">
+    <style>
+        .project-page-header {
+            padding: 3rem 0 2rem;
+        }
+
+        .project-back {
+            display: inline-block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .project-back:hover { color: var(--accent-warm); }
+        .project-back::before { content: '← '; }
+
+        .project-page-header h1 {
+            color: var(--accent-warm);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-page-header .project-tagline {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            max-width: 680px;
+            line-height: 1.6;
+        }
+
+        .project-body {
+            max-width: 760px;
+            margin-top: 3rem;
+        }
+
+        .project-body h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 2.5rem;
+            margin-bottom: 0.5rem;
+            padding-top: 0;
+        }
+
+        .project-body p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+
+        .project-body ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-body li {
+            padding-left: 1.4rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .project-body li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--text);
+            font-size: 0.8rem;
+        }
+
+        .project-status-bar {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2.5rem 0;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .psb-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 0.25rem;
+        }
+
+        .psb-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .search-examples {
+            margin: 1.5rem 0 2rem;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .search-examples .ex-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+        }
+
+        .search-examples ul {
+            margin-bottom: 0;
+        }
+
+        .search-examples li {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .search-examples li::before {
+            content: '›';
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="consulting.html">Consulting</a></li>
+                <li class="nav-dropdown"><a href="#">Works</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="writing.html">Writing</a></li>
+                        <li><a href="music.html">Music</a></li>
+                        <li><a href="art.html">Art</a></li>
+                    </ul>
+                </li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li class="nav-dropdown"><a href="#">CV</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="SteveLibbeyCV.pdf">General</a></li>
+                        <li><a href="SteveLibbeyCV-Healthcare.pdf">Healthcare</a></li>
+                    </ul>
+                </li>
+                <li><a href="mailto:stevelibbey@gmail.com" aria-label="Email" class="email-icon">&#9993;</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <img src="assets/img/stevelibbey.png" alt="Steve Libbey" class="logo logo-static">
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <div class="container">
+        <div class="project-page-header">
+            <a href="projects.html" class="project-back">Projects</a>
+            <div class="case-study-meta" style="margin-bottom: 1rem;">
+                <span class="meta-tag">Music Tool</span>
+                <span class="meta-tag">Research-Driven Discovery</span>
+                <span class="meta-tag">Product Design</span>
+            </div>
+            <h1>Noise Gift</h1>
+            <p class="project-tagline">A research-driven music discovery tool that builds playlists from artist lineages, historical charts, and scenes defined by time and place. No algorithm. No feed.</p>
+        </div>
+
+        <div class="project-status-bar reveal">
+            <div class="psb-item">
+                <div class="psb-label">Type</div>
+                <div class="psb-value">Music tool</div>
+            </div>
+            <div class="psb-item">
+                <div class="psb-label">Model</div>
+                <div class="psb-value">Research-driven</div>
+            </div>
+            <div class="psb-item">
+                <div class="psb-label">Output</div>
+                <div class="psb-value">Importable playlists</div>
+            </div>
+        </div>
+
+        <div class="project-body">
+
+            <h2>The Problem</h2>
+            <p>Streaming recommendation engines optimize for engagement. They are good at keeping you listening to things you already like. They are not good at helping you find music that connects to something specific — an artist's stated influences, a moment in a city's music history, a scene you read about but never heard.</p>
+            <p>Noise Gift is built for a different kind of curiosity.</p>
+
+            <h2>How It Works</h2>
+            <p>Instead of recommending music based on behavior, Noise Gift builds playlists from real-world inputs: artists and the records they explicitly pointed to, historical charts tied to specific dates and locations, and scenes defined by time and place.</p>
+
+            <div class="search-examples reveal">
+                <div class="ex-label">You can search things like</div>
+                <ul>
+                    <li>Tom Waits</li>
+                    <li>Jamaica 1963</li>
+                    <li>Los Angeles punk 1978</li>
+                    <li>Chicago blues 1955</li>
+                    <li>Bristol sound 1994</li>
+                </ul>
+            </div>
+
+            <p>Each search produces a clean, playable playlist that can be exported to services like Apple Music and Spotify.</p>
+
+            <h2>Design Principles</h2>
+            <ul>
+                <li>No accounts, no feeds, no social features — this is a tool, not a platform</li>
+                <li>Results grounded in documented history, not behavioral inference</li>
+                <li>Fast path from idea to something you can hear immediately</li>
+                <li>No algorithmic drift — the same search returns the same kind of result</li>
+                <li>Export-first: the goal is music in your player, not time on the site</li>
+            </ul>
+
+            <h2>Why It Exists</h2>
+            <p>Music discovery tools are mostly built around what the algorithm thinks you want next. Noise Gift is built around what you're actually curious about. The difference is whether the tool follows your intent or substitutes its own.</p>
+            <p>That distinction — user intent versus system intent — is the same tension at the center of most AI product design problems. Noise Gift is one place I work through it in a concrete domain.</p>
+
+            <h2>Current Status</h2>
+            <p>In development. Core search model and playlist generation are functional. Export integration and UI are in progress.</p>
+
+        </div>
+
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="footer-content">
+                <h2><a href="mailto:stevelibbey@gmail.com" class="contact-link">Let's Talk</a></h2>
+                <p>Senior product designer seeking roles in healthcare systems, enterprise analytics, AI-enabled tools, and complex workflow design. Fully remote, based in California.</p>
+                <div class="footer-links">
+                    <a href="mailto:stevelibbey@gmail.com">Email</a>
+                    <a href="https://www.linkedin.com/in/stevelibbey" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="SteveLibbeyCV.pdf">Resume</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

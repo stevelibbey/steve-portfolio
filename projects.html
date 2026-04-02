@@ -3,13 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Yorick and Other Product Explorations by Steve Libbey</title>
-    <meta name="description" content="Exploratory product work by Steve Libbey including Yorick, an AI-assisted writing studio exploring trust, workflow design, and structured creativity.">
+    <title>Projects | Steve Libbey</title>
+    <meta name="description" content="Exploratory product work by Steve Libbey including Yorick, Thingmo, and Noise Gift.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="icon" type="image/png" href="assets/img/stevelibbey.png">
+    <style>
+        .projects-hub {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-hub-card {
+            background: var(--surface);
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            overflow: hidden;
+        }
+
+        .project-hub-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.1);
+        }
+
+        .project-hub-card:visited {
+            color: inherit;
+        }
+
+        .phc-bar {
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .phc-body {
+            padding: 1.75rem 1.75rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phc-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .phc-body h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            padding-top: 0;
+        }
+
+        .phc-body p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .phc-cta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .phc-cta::after {
+            content: ' →';
+        }
+
+        @media (max-width: 600px) {
+            .projects-hub {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="site-nav">
@@ -50,66 +134,52 @@
             <img src="assets/img/artifact4.png" alt="Projects" class="page-header-image reveal" style="--delay: 0.1s;"/>
         </div>
 
-        <!-- Yorick -->
-        <div class="project-detail reveal" style="--delay: 0s;">
-            <h3>Yorick Writing Studio</h3>
-            <div class="case-study-meta" style="margin-bottom: 1rem;">
-                <span class="meta-tag">AI Product Design</span>
-                <span class="meta-tag">Trust &amp; Control</span>
-                <span class="meta-tag">Workflow Design</span>
-                <span class="meta-tag">2024&ndash;Present</span>
-            </div>
+        <div class="projects-hub">
 
-            <p>Yorick is an AI-assisted writing and thinking system I conceived, designed, and am actively building. It exists because most AI writing tools optimize for output at the expense of voice, judgment, and authorship. Yorick takes the opposite approach: the writer stays in control, AI assists without overwriting, and the system is designed around the integrity of the creative process.</p>
+            <!-- Yorick -->
+            <a href="yorick.html" class="project-hub-card reveal" style="--delay: 0s;">
+                <div class="phc-bar"></div>
+                <div class="phc-body">
+                    <div class="phc-tags">
+                        <span class="meta-tag">AI Product Design</span>
+                        <span class="meta-tag">Writing</span>
+                        <span class="meta-tag">2024&ndash;Present</span>
+                    </div>
+                    <h3>Yorick Writing Studio</h3>
+                    <p>An AI-assisted writing system built to preserve the integrity of a writer's voice. The writer stays in control; AI assists without overwriting. Designed around authorship, not output.</p>
+                    <span class="phc-cta">View project</span>
+                </div>
+            </a>
 
-            <p>The project started from a specific observation: writers were losing trust in their own work because AI tools made it too easy to generate text that was not theirs. Readers and editors were reacting not just to AI-generated prose but to the suspicion that a piece might be machine-written. The design challenge was to build a system where AI support strengthens the writer's work without replacing it.</p>
+            <!-- Thingmo -->
+            <a href="thingmo.html" class="project-hub-card reveal" style="--delay: 0.06s;">
+                <div class="phc-bar"></div>
+                <div class="phc-body">
+                    <div class="phc-tags">
+                        <span class="meta-tag">Product Design</span>
+                        <span class="meta-tag">Cataloging</span>
+                    </div>
+                    <h3>Thingmo</h3>
+                    <p>A tool for people who want to know what they own. Catalog, organize, and make sense of collections, gear, libraries, and possessions without the overhead of a full inventory system.</p>
+                    <span class="phc-cta">View project</span>
+                </div>
+            </a>
 
-            <h4 style="font-family: 'Syne', sans-serif; font-size: 1rem; margin-top: 1.5rem; color: var(--text);">What I Designed</h4>
-            <ul>
-                <li>An editor-first workspace where the manuscript is the center of gravity, not a chat window</li>
-                <li>Selection-driven AI actions: tighten, expand, clarify, increase tension, rewrite dialogue, check continuity</li>
-                <li>A proposal tray that holds AI-generated alternatives without silently altering the draft</li>
-                <li>Separation of analysis (diagnostics, continuity checks) from revision (text rewrites)</li>
-                <li>Writer control over AI intrusiveness: quiet, helpful, or active modes</li>
-                <li>Story Bible, canon tracking, and scene-level contextual intelligence</li>
-            </ul>
+            <!-- Noise Gift -->
+            <a href="noisegift.html" class="project-hub-card reveal" style="--delay: 0.12s;">
+                <div class="phc-bar"></div>
+                <div class="phc-body">
+                    <div class="phc-tags">
+                        <span class="meta-tag">Music Tool</span>
+                        <span class="meta-tag">Research-Driven</span>
+                        <span class="meta-tag">Product Design</span>
+                    </div>
+                    <h3>Noise Gift</h3>
+                    <p>A research-driven music discovery tool that builds playlists from real-world inputs: artist lineages, historical charts, and scenes defined by time and place. No algorithm. No feed.</p>
+                    <span class="phc-cta">View project</span>
+                </div>
+            </a>
 
-            <h4 style="font-family: 'Syne', sans-serif; font-size: 1rem; margin-top: 1.5rem; color: var(--text);">Why It Matters Professionally</h4>
-            <p>Yorick is directly relevant to the broader challenge of designing AI-enabled products. The problems it addresses&mdash;trust, transparency, user control, workflow integration, the boundary between human judgment and machine output&mdash;are the same problems facing any team building AI into their product. This project forces me to work through those problems at the interaction design level, not just in theory.</p>
-
-            <h4 style="font-family: 'Syne', sans-serif; font-size: 1rem; margin-top: 1.5rem; color: var(--text);">Current Status</h4>
-            <p>In active development. Private alpha with working writers. Core design decisions are stable. Implementation is ongoing. Details are intentionally limited while the product is in development.</p>
-        </div>
-
-        <!-- Noisegift -->
-        <div class="project-detail reveal" style="--delay: 0.04s;">
-            <h3>Noise Gift</h3>
-            <div class="case-study-meta" style="margin-bottom: 1rem;">
-                <span class="meta-tag">Music Tool</span>
-                <span class="meta-tag">Research-Driven Discovery</span>
-                <span class="meta-tag">Product Design</span>
-            </div>
-
-            <p>Noisegift is a research-driven music tool that generates playlists you can import into your streaming service.</p>
-
-            <p>Instead of recommending music based on behavior, Noisegift builds playlists from real-world inputs: artists and the records they explicitly pointed to, historical charts tied to specific dates and locations, and scenes defined by time and place.</p>
-
-            <h4 style="font-family: 'Syne', sans-serif; font-size: 1rem; margin-top: 1.5rem; color: var(--text);">You can search things like</h4>
-            <ul>
-                <li>Tom Waits</li>
-                <li>Jamaica 1963</li>
-                <li>Los Angeles punk 1978</li>
-            </ul>
-
-            <p>Each search produces a clean, playable playlist that can be exported to services like Apple Music and Spotify.</p>
-
-            <p>There are no accounts, no feeds, and no social features. Noisegift is not a platform. It is a tool for turning ideas into something you can hear immediately.</p>
-        </div>
-
-        <!-- Future Projects -->
-        <div class="future-projects reveal" style="--delay: 0.08s;">
-            <h3>More to Come</h3>
-            <p>Additional explorations in AI workflow design, structured decision support, and complex product thinking will appear here as they take shape.</p>
         </div>
 
         <!-- Footer -->

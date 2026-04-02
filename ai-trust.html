@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trust & Authorship — Steve Libbey</title>
+    <meta name="description" content="A data visualization charting the gap between AI adoption and trust norms across writing contexts.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/img/stevelibbey.png">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        /* ── CSS Variables ── */
+        :root {
+            --bg: #0f0f0f;
+            --text: #f0ede8;
+            --text-muted: #888;
+            --surface: #1a1a1a;
+            --divider: #2a2a2a;
+            --amber: #e8a838;
+            --red: #c45c4a;
+            --blue: #5b8db8;
+            --sage: #5a8a6a;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --font-mono: 'DM Mono', monospace;
+        }
+
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 17px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── Nav ── */
+        .site-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 900;
+            border-bottom: 1px solid var(--divider);
+            background: rgba(15,15,15,0.92);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-back {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--amber); }
+        .nav-back::before { content: '← '; }
+
+        .nav-title {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ── Layout ── */
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 120px 0;
+        }
+
+        section + section {
+            border-top: 1px solid var(--divider);
+        }
+
+        /* ── Typography ── */
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--text);
+            margin-bottom: 0.25em;
+            opacity: 0;
+            animation: fadeIn 0.7s ease-out 0.1s forwards;
+        }
+
+        .hero-headline-2 {
+            font-family: var(--font-display);
+            font-size: clamp(24px, 3.5vw, 36px);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 0.7s ease-out 0.3s forwards;
+        }
+
+        .hero-intro {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 0.7s ease-out 0.5s forwards;
+        }
+
+        .section-headline {
+            font-family: var(--font-display);
+            font-size: clamp(22px, 3vw, 28px);
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .section-intro {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* ── ChartWrapper ── */
+        .chart-wrapper {
+            margin: 3rem 0;
+        }
+
+        .chart-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .chart-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-source {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        .chart-note {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* ── Chart 1 SVG ── */
+        #chart1 {
+            width: 100%;
+            overflow: visible;
+        }
+
+        .chart1-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .legend-swatch {
+            width: 24px;
+            height: 3px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* ── Chart 2 Bars ── */
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .bar-item { }
+
+        .bar-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-body);
+        }
+
+        .bar-track {
+            background: rgba(232,168,56,0.1);
+            border-radius: 3px;
+            height: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--amber);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 1s cubic-bezier(0.4,0,0.2,1);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+        }
+
+        .bar-fill.animate { width: var(--target-width); }
+
+        .bar-pct {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--bg);
+            white-space: nowrap;
+        }
+
+        /* ── NuanceCard ── */
+        .nuance-card {
+            border-left: 3px solid var(--amber);
+            background: rgba(232,168,56,0.05);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .nuance-card-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--amber);
+            margin-bottom: 0.5rem;
+        }
+
+        .nuance-card p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ── Chart 3: Disclosure Matrix Table ── */
+        .disclosure-table-wrapper {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .disclosure-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .disclosure-table th {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--divider);
+            white-space: nowrap;
+        }
+
+        .disclosure-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--divider);
+            vertical-align: top;
+        }
+
+        .disclosure-table tr:last-child td { border-bottom: none; }
+
+        .disclosure-table .col-domain {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .disclosure-table .col-finding {
+            color: var(--text);
+            line-height: 1.5;
+            cursor: default;
+            position: relative;
+        }
+
+        .disclosure-table .col-finding:hover .finding-note {
+            display: block;
+        }
+
+        .finding-note {
+            display: none;
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-style: italic;
+            z-index: 10;
+            min-width: 220px;
+            max-width: 320px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        }
+
+        .finding-note-inline {
+            display: none;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 0.4rem;
+            line-height: 1.5;
+        }
+
+        .dir-cell {
+            text-align: center;
+            border-radius: 4px;
+            width: 80px;
+        }
+
+        .dir-cell svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .disclosure-table .col-source {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .matrix-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── Chart 4: Trust Matrix Grid ── */
+        .trust-matrix {
+            display: grid;
+            grid-template-columns: 140px repeat(6, 1fr);
+            gap: 1px;
+            background: var(--divider);
+            border: 1px solid var(--divider);
+            border-radius: 6px;
+            overflow: hidden;
+            font-size: 13px;
+            margin: 1.5rem 0;
+        }
+
+        .tm-cell {
+            background: var(--bg);
+            padding: 0.75rem 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tm-header {
+            background: var(--surface);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            line-height: 1.4;
+        }
+
+        .tm-row-label {
+            background: var(--surface);
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            padding: 0.75rem 1rem;
+            justify-content: flex-start;
+        }
+
+        .tm-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: block;
+        }
+
+        .tm-dot-high   { background: var(--red); opacity: 1; }
+        .tm-dot-medium { background: var(--red); opacity: 0.55; }
+        .tm-dot-low    { background: var(--red); opacity: 0.22; }
+        .tm-dot-none   { background: transparent; border: 1px solid var(--divider); opacity: 1; }
+
+        .trust-matrix-footer {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        /* ── Legend for matrix ── */
+        .tm-legend {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tm-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ── Section 2: Cards ── */
+        .context-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .context-card {
+            background: var(--surface);
+            border-radius: 8px;
+            padding: 1.75rem;
+            border: 1px solid var(--divider);
+        }
+
+        .context-card h3 {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .context-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .context-card ul li {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding: 0.3rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .context-card ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--amber);
+        }
+
+        .context-card .card-source {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--divider);
+        }
+
+        /* ── Section 6: Takeaways ── */
+        .takeaways-list {
+            list-style: none;
+            counter-reset: takeaway;
+            margin-top: 2rem;
+        }
+
+        .takeaway-item {
+            counter-increment: takeaway;
+            display: flex;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .takeaway-item:last-child { border-bottom: none; }
+
+        .takeaway-num {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--divider);
+            line-height: 1;
+            flex-shrink: 0;
+            width: 60px;
+        }
+
+        .takeaway-body h3 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .takeaway-body p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .takeaway-disclaimer {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 2rem;
+        }
+
+        /* ── Section 7: Method ── */
+        .method-section {
+            padding: 60px 0 80px;
+        }
+
+        .method-divider {
+            border: none;
+            border-top: 1px solid var(--divider);
+            margin-bottom: 2rem;
+        }
+
+        .method-text {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        /* ── Reveal animation ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            section { padding: 80px 0; }
+
+            .context-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .trust-matrix {
+                grid-template-columns: 100px repeat(6, 1fr);
+                font-size: 11px;
+            }
+
+            .tm-header { font-size: 9px; padding: 0.5rem 0.25rem; }
+            .tm-row-label { font-size: 12px; padding: 0.5rem; }
+            .tm-cell { padding: 0.5rem 0.25rem; }
+            .tm-dot { width: 12px; height: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .page { padding: 0 1.25rem; }
+            section { padding: 60px 0; }
+
+            .context-cards { grid-template-columns: 1fr; }
+
+            .trust-matrix {
+                grid-template-columns: 80px repeat(6, 1fr);
+                font-size: 10px;
+            }
+
+            .tm-header { font-size: 8px; padding: 0.4rem 0.15rem; }
+            .tm-dot { width: 10px; height: 10px; }
+
+            .takeaway-item { gap: 1rem; }
+            .takeaway-num { font-size: 32px; width: 40px; }
+
+            .disclosure-table { font-size: 13px; }
+        }
+
+        /* ── Tooltip ── */
+        .d3-tooltip {
+            position: fixed;
+            background: var(--surface);
+            border: 1px solid var(--divider);
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--text);
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 240px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+
+        .d3-tooltip.visible { opacity: 1; }
+
+        .tooltip-label {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 0.25rem;
+        }
+
+        .tooltip-value {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--amber);
+        }
+
+        .tooltip-source {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="portfolio.html" class="nav-back">Portfolio</a>
+            <span class="nav-title">AI Trust &amp; Authorship</span>
+        </div>
+    </nav>
+
+    <!-- Tooltip (shared) -->
+    <div class="d3-tooltip" id="tooltip"></div>
+
+    <div class="page" style="padding-top: 80px;">
+
+        <!-- ── Section 1: Hero ── -->
+        <section id="hero">
+            <h1 class="hero-headline">AI writing adoption is a usage story.</h1>
+            <p class="hero-headline-2">Trust is an authorship and transparency story.</p>
+            <p class="hero-intro">
+                AI writing tools are being adopted faster than social norms around trust,
+                authorship, and disclosure are settling. The result is not one trust problem,
+                but several. Nonfiction writers face credibility and accuracy pressure. Corporate
+                writers face workflow opacity and brand risk. Fiction writers face the hardest
+                authorship questions of all.
+            </p>
+
+            <!-- Chart 1 -->
+            <div class="chart-wrapper reveal" style="--delay:0s">
+                <div class="chart-title">AI use is rising faster than comfort with AI</div>
+                <svg id="chart1"></svg>
+                <div class="chart1-legend" id="chart1Legend"></div>
+                <div class="chart-source">Sources: Pew Research, Brookings Institute</div>
+            </div>
+        </section>
+
+        <!-- ── Section 2: Three contexts ── -->
+        <section id="contexts">
+            <h2 class="section-headline reveal">Three writing contexts. Three different trust problems.</h2>
+            <div class="context-cards">
+                <div class="context-card reveal" style="transition-delay:0.05s">
+                    <h3>Nonfiction</h3>
+                    <ul>
+                        <li>Fear of hallucinations corrupting factual claims</li>
+                        <li>Disclosure standards and editorial accountability</li>
+                        <li>Reader trust tied directly to accuracy</li>
+                    </ul>
+                    <div class="card-source">Pew Research, 2024–25</div>
+                </div>
+                <div class="context-card reveal" style="transition-delay:0.1s">
+                    <h3>Corporate</h3>
+                    <ul>
+                        <li>Hidden AI use inside production workflows</li>
+                        <li>Brand and legal exposure</li>
+                        <li>Workers worried about AI displacement</li>
+                    </ul>
+                    <div class="card-source">Pew Research, 2024–25</div>
+                </div>
+                <div class="context-card reveal" style="transition-delay:0.15s">
+                    <h3>Fiction</h3>
+                    <ul>
+                        <li>Authorship, authenticity, and training data ethics</li>
+                        <li>Readers expect human involvement</li>
+                        <li>Disclosure changes whether the work feels worth reading</li>
+                    </ul>
+                    <div class="card-source">Wakefield / Wattpad, YouGov / Black Château</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Section 3: Book Trust ── -->
+        <section id="book-trust">
+            <h2 class="section-headline reveal">Reader expectations for AI in books</h2>
+            <p class="section-intro reveal">Three numbers from two independent surveys, all pointing in the same direction.</p>
+
+            <!-- Chart 2 -->
+            <div class="chart-wrapper reveal">
+                <div class="chart-title">Readers still want human authorship and transparency</div>
+                <div class="bar-chart" id="chart2"></div>
+                <div class="chart-source">Sources: Wakefield Research for Wattpad (2024); YouGov for Black Château (2025)</div>
+            </div>
+
+            <div class="nuance-card reveal">
+                <div class="nuance-card-label">Research note</div>
+                <p>Blind reading research complicates this. Controlled studies found lay readers are not always able to reliably distinguish human from AI writing in literary excerpts, and did not always show a clear blind preference. Expert readers are consistently harsher. The reader-attitude data above measures what people say they want — not what they detect.</p>
+            </div>
+        </section>
+
+        <!-- ── Section 4: Disclosure ── -->
+        <section id="disclosure">
+            <h2 class="section-headline reveal">Disclosure affects trust. But not in one direction.</h2>
+            <p class="section-intro reveal">The journalism research does not all point the same way.</p>
+
+            <!-- Chart 3 -->
+            <div class="chart-wrapper reveal">
+                <div class="chart-title">Disclosure affects trust, but not in one direction</div>
+                <div class="matrix-label">Study findings — specific contexts, not universal percentages</div>
+                <div class="disclosure-table-wrapper">
+                    <table class="disclosure-table" id="chart3"></table>
+                </div>
+                <div class="chart-source">Sources: Political Communication / Sage (2024); Gilardi et al. preregistered study (2024); YouGov for Black Château (2025)</div>
+            </div>
+        </section>
+
+        <!-- ── Section 5: Trust Matrix ── -->
+        <section id="trust-matrix">
+            <h2 class="section-headline reveal">The trust problem depends on who is writing and why.</h2>
+
+            <!-- Chart 4 -->
+            <div class="chart-wrapper reveal">
+                <div class="chart-title">Trust issues are not the same across writing contexts</div>
+                <div class="tm-legend">
+                    <div class="tm-legend-item"><span class="tm-dot tm-dot-high"></span> High concern</div>
+                    <div class="tm-legend-item"><span class="tm-dot tm-dot-medium"></span> Medium</div>
+                    <div class="tm-legend-item"><span class="tm-dot tm-dot-low"></span> Low</div>
+                    <div class="tm-legend-item"><span class="tm-dot tm-dot-none"></span> Not primary</div>
+                </div>
+                <div class="trust-matrix" id="chart4"></div>
+                <div class="trust-matrix-footer">
+                    Based on cited survey data. Cell values represent relative concern weighting, not measured percentages.<br>
+                    Corporate + workplace: Pew Research. Fiction: Wakefield / Wattpad, YouGov / Black Château.
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Section 6: Design Principles ── -->
+        <section id="principles">
+            <h2 class="section-headline reveal">Five design principles that follow from this research</h2>
+            <ol class="takeaways-list">
+                <li class="takeaway-item reveal" style="transition-delay:0.05s">
+                    <div class="takeaway-num">01</div>
+                    <div class="takeaway-body">
+                        <h3>Treat authorship as a product surface.</h3>
+                        <p>Not a legal footnote. Who or what wrote this is part of the product experience.</p>
+                    </div>
+                </li>
+                <li class="takeaway-item reveal" style="transition-delay:0.1s">
+                    <div class="takeaway-num">02</div>
+                    <div class="takeaway-body">
+                        <h3>Make AI participation inspectable.</h3>
+                        <p>Users should be able to see where and how AI contributed, without hunting for it.</p>
+                    </div>
+                </li>
+                <li class="takeaway-item reveal" style="transition-delay:0.15s">
+                    <div class="takeaway-num">03</div>
+                    <div class="takeaway-body">
+                        <h3>Separate assistance from authorship.</h3>
+                        <p>Helping a writer is not the same as writing for them. Products that blur this line create trust problems downstream.</p>
+                    </div>
+                </li>
+                <li class="takeaway-item reveal" style="transition-delay:0.2s">
+                    <div class="takeaway-num">04</div>
+                    <div class="takeaway-body">
+                        <h3>Support disclosure without making users guess.</h3>
+                        <p>If the workflow produces AI-assisted content, disclosure should be an output of the tool, not an afterthought the user has to construct manually.</p>
+                    </div>
+                </li>
+                <li class="takeaway-item reveal" style="transition-delay:0.25s">
+                    <div class="takeaway-num">05</div>
+                    <div class="takeaway-body">
+                        <h3>Build for editorial review, not just generation speed.</h3>
+                        <p>The bottleneck in trust-sensitive writing is not output volume. It is human judgment about what to use.</p>
+                    </div>
+                </li>
+            </ol>
+            <p class="takeaway-disclaimer reveal">These are design conclusions drawn from the cited research, not universal product requirements.</p>
+        </section>
+
+        <!-- ── Section 7: Method ── -->
+        <div class="method-section">
+            <hr class="method-divider">
+            <p class="method-text">
+                This artifact combines national surveys (Pew, Brookings), book-reader surveys (Wakefield Research for Wattpad, YouGov for Black Château), and academic disclosure studies (Political Communication / Sage; Gilardi et al.). Some measures are direct population percentages from nationally representative samples. Some are study findings from specific experimental contexts. Fiction and book-reader data measures reader attitudes and disclosure response — not book sales or consumption volume. The writer-type trust matrix is interpretive, based on relative concern weighting across cited sources.
+            </p>
+        </div>
+
+    </div><!-- /.page -->
+
+<script>
+// ── Shared data (inlined to avoid CORS on file://) ──────────────────────────
+const TIMELINE = [
+  { year: 2024, metric: "ai_adoption_us_working_age", value: 39.6, label: "Working-age Americans using generative AI", sourceLabel: "Brookings / Real-Time Population Survey" },
+  { year: 2025, metric: "ai_adoption_us_adults",       value: 56,   label: "American adults using AI tools",              sourceLabel: "Brookings / YouGov" },
+  { year: 2024, metric: "ai_use_at_work",              value: 16,   label: "U.S. workers using AI at work",              sourceLabel: "Pew Research" },
+  { year: 2025, metric: "ai_use_at_work",              value: 21,   label: "U.S. workers using AI at work",              sourceLabel: "Pew Research" },
+  { year: 2021, metric: "more_concerned_than_excited", value: 37,   label: "Americans more concerned than excited about AI", sourceLabel: "Pew Research" },
+  { year: 2025, metric: "more_concerned_than_excited", value: 50,   label: "Americans more concerned than excited about AI", sourceLabel: "Pew Research" },
+];
+
+const FICTION = [
+  { metric: "human_involvement_matters",   value: 92, label: "Readers who say human involvement in writing and producing books matters", sourceLabel: "Wakefield Research for Wattpad" },
+  { metric: "want_disclosure_before_reading", value: 56, label: "Readers who want AI disclosure before reading a book",                  sourceLabel: "YouGov for Black Château" },
+  { metric: "less_fulfilled_post_discovery",  value: 61, label: "Readers who feel less fulfilled if they later learn a book was AI-written", sourceLabel: "YouGov for Black Château" },
+];
+
+const DISCLOSURE = [
+  { domain: "News",  finding: "AI label lowers perceived trustworthiness",              trust: -1, engagement:  0, futureIntent:  0, note: "Even when accuracy and fairness ratings stayed flat",                                                       sourceLabel: "Political Communication / Sage, 2024" },
+  { domain: "News",  finding: "Disclosure raises short-term willingness to continue reading", trust:  0, engagement:  1, futureIntent: -1, note: "Short-term engagement tick-up but no improvement in future willingness to read AI news",                    sourceLabel: "Gilardi et al. preregistered study, 2024" },
+  { domain: "Books", finding: "Post-hoc discovery of AI authorship reduces fulfillment", trust: -1, engagement:  0, futureIntent: -1, note: "61% feel less fulfilled. Distinct from pre-read disclosure.",                                               sourceLabel: "YouGov for Black Château, 2025" },
+];
+
+// ── Tooltip helper ───────────────────────────────────────────────────────────
+const tooltip = document.getElementById('tooltip');
+
+function showTooltip(evt, html) {
+    tooltip.innerHTML = html;
+    tooltip.classList.add('visible');
+    moveTooltip(evt);
+}
+
+function moveTooltip(evt) {
+    const pad = 16;
+    let x = evt.clientX + pad;
+    let y = evt.clientY + pad;
+    if (x + 260 > window.innerWidth)  x = evt.clientX - 260;
+    if (y + 120 > window.innerHeight) y = evt.clientY - 120;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top  = y + 'px';
+}
+
+function hideTooltip() {
+    tooltip.classList.remove('visible');
+}
+
+// ── CHART 1: Adoption vs Concern ─────────────────────────────────────────────
+(function buildChart1() {
+    const el = document.getElementById('chart1');
+    const container = el.parentElement;
+
+    const series = [
+        {
+            key: 'adoption',
+            label: 'AI adoption (general)',
+            color: '#e8a838',
+            points: TIMELINE.filter(d => d.metric === 'ai_adoption_us_working_age' || d.metric === 'ai_adoption_us_adults'),
+            dashed: false,
+        },
+        {
+            key: 'work',
+            label: 'AI use at work',
+            color: '#5b8db8',
+            points: TIMELINE.filter(d => d.metric === 'ai_use_at_work'),
+            dashed: false,
+        },
+        {
+            key: 'concern',
+            label: 'More concerned than excited about AI',
+            color: '#c45c4a',
+            points: TIMELINE.filter(d => d.metric === 'more_concerned_than_excited'),
+            dashed: true, // gap between 2021 and 2025
+        },
+    ];
+
+    const margin = { top: 24, right: 80, bottom: 48, left: 44 };
+    const W = Math.min(container.offsetWidth || 840, 840);
+    const H = 320;
+    const iW = W - margin.left - margin.right;
+    const iH = H - margin.top - margin.bottom;
+
+    const tickYears = [2021, 2024, 2025];
+
+    const xScale = d3.scalePoint()
+        .domain(tickYears)
+        .range([0, iW])
+        .padding(0.15);
+
+    const yScale = d3.scaleLinear()
+        .domain([0, 100])
+        .range([iH, 0]);
+
+    const svg = d3.select('#chart1')
+        .attr('viewBox', `0 0 ${W} ${H}`)
+        .attr('width', '100%');
+
+    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+    // Gridlines
+    g.append('g')
+        .attr('class', 'gridlines')
+        .selectAll('line')
+        .data(yScale.ticks(5))
+        .join('line')
+        .attr('x1', 0).attr('x2', iW)
+        .attr('y1', d => yScale(d)).attr('y2', d => yScale(d))
+        .attr('stroke', '#2a2a2a')
+        .attr('stroke-width', 1);
+
+    // Axes
+    g.append('g')
+        .attr('transform', `translate(0,${iH})`)
+        .call(d3.axisBottom(xScale).tickValues(tickYears).tickSize(0))
+        .call(ax => ax.select('.domain').remove())
+        .call(ax => ax.selectAll('text')
+            .attr('fill', '#888')
+            .attr('font-family', 'DM Mono, monospace')
+            .attr('font-size', '12px')
+            .attr('dy', '1.5em'));
+
+    g.append('g')
+        .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => d + '%').tickSize(0))
+        .call(ax => ax.select('.domain').remove())
+        .call(ax => ax.selectAll('text')
+            .attr('fill', '#888')
+            .attr('font-family', 'DM Mono, monospace')
+            .attr('font-size', '12px')
+            .attr('dx', '-0.5em'));
+
+    // Lines + points per series
+    series.forEach(s => {
+        const pts = s.points.slice().sort((a, b) => a.year - b.year);
+
+        if (s.dashed && pts.length === 2) {
+            // Solid start point to 2024 implicit (just two points, draw dashed)
+            g.append('line')
+                .attr('x1', xScale(pts[0].year))
+                .attr('y1', yScale(pts[0].value))
+                .attr('x2', xScale(pts[1].year))
+                .attr('y2', yScale(pts[1].value))
+                .attr('stroke', s.color)
+                .attr('stroke-width', 2)
+                .attr('stroke-dasharray', '6 4')
+                .attr('opacity', 0.7)
+                .attr('class', 'chart1-line');
+        } else {
+            const lineGen = d3.line()
+                .x(d => xScale(d.year))
+                .y(d => yScale(d.value));
+
+            const path = g.append('path')
+                .datum(pts)
+                .attr('fill', 'none')
+                .attr('stroke', s.color)
+                .attr('stroke-width', 2.5)
+                .attr('d', lineGen)
+                .attr('class', 'chart1-line');
+
+            // Stroke-dashoffset animation
+            const len = path.node().getTotalLength();
+            path.attr('stroke-dasharray', len)
+                .attr('stroke-dashoffset', len);
+        }
+
+        // Circles
+        g.selectAll(`.dot-${s.key}`)
+            .data(pts)
+            .join('circle')
+            .attr('class', `dot-${s.key}`)
+            .attr('cx', d => xScale(d.year))
+            .attr('cy', d => yScale(d.value))
+            .attr('r', 5)
+            .attr('fill', s.color)
+            .attr('stroke', '#0f0f0f')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mousemove', (evt, d) => {
+                showTooltip(evt,
+                    `<div class="tooltip-label">${d.label}</div>
+                     <div class="tooltip-value">${d.value}%</div>
+                     <div class="tooltip-source">${d.year} · ${d.sourceLabel}</div>`
+                );
+            })
+            .on('mouseleave', hideTooltip);
+    });
+
+    // Annotation
+    const annX = xScale(2025) + 10;
+    const annY = yScale(50) - 10;
+    g.append('text')
+        .attr('x', annX)
+        .attr('y', annY)
+        .attr('fill', '#888')
+        .attr('font-family', 'DM Mono, monospace')
+        .attr('font-size', '11px')
+        .text('Usage up.');
+    g.append('text')
+        .attr('x', annX)
+        .attr('y', annY + 14)
+        .attr('fill', '#888')
+        .attr('font-family', 'DM Mono, monospace')
+        .attr('font-size', '11px')
+        .text('Comfort lagging.');
+
+    // Legend
+    const legendEl = document.getElementById('chart1Legend');
+    series.forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+        const swatch = document.createElement('div');
+        swatch.className = 'legend-swatch';
+        swatch.style.background = s.color;
+        if (s.dashed) swatch.style.background = `repeating-linear-gradient(to right, ${s.color} 0, ${s.color} 4px, transparent 4px, transparent 8px)`;
+        item.appendChild(swatch);
+        item.appendChild(document.createTextNode(s.label));
+        legendEl.appendChild(item);
+    });
+
+    // Animate lines on scroll
+    function animateChart1() {
+        g.selectAll('.chart1-line')
+            .transition()
+            .duration(1400)
+            .ease(d3.easeCubicInOut)
+            .attr('stroke-dashoffset', 0);
+    }
+
+    observeOnce(el.closest('.chart-wrapper'), animateChart1);
+})();
+
+// ── CHART 2: Book Trust Bars ──────────────────────────────────────────────────
+(function buildChart2() {
+    const container = document.getElementById('chart2');
+
+    FICTION.forEach((d, i) => {
+        const item = document.createElement('div');
+        item.className = 'bar-item';
+
+        const label = document.createElement('div');
+        label.className = 'bar-label';
+        label.textContent = d.label;
+
+        const track = document.createElement('div');
+        track.className = 'bar-track';
+
+        const fill = document.createElement('div');
+        fill.className = 'bar-fill';
+        fill.style.setProperty('--target-width', d.value + '%');
+        fill.style.transitionDelay = (i * 150) + 'ms';
+
+        const pct = document.createElement('div');
+        pct.className = 'bar-pct';
+        pct.textContent = d.value + '%';
+
+        fill.appendChild(pct);
+        track.appendChild(fill);
+        item.appendChild(label);
+        item.appendChild(track);
+        container.appendChild(item);
+    });
+
+    // Animate on scroll
+    function animateBars() {
+        container.querySelectorAll('.bar-fill').forEach(f => f.classList.add('animate'));
+    }
+
+    observeOnce(container.closest('.chart-wrapper'), animateBars);
+})();
+
+// ── CHART 3: Disclosure Matrix ────────────────────────────────────────────────
+(function buildChart3() {
+    const isMobile = window.innerWidth <= 480;
+    const table = document.getElementById('chart3');
+
+    // Header
+    const thead = table.createTHead();
+    const hRow = thead.insertRow();
+    ['Domain', 'Finding', 'Trust Effect', 'Short-term Engagement', 'Future Intent', 'Source'].forEach(h => {
+        const th = document.createElement('th');
+        th.textContent = h;
+        hRow.appendChild(th);
+    });
+
+    const tbody = table.createTBody();
+
+    DISCLOSURE.forEach(row => {
+        const tr = tbody.insertRow();
+
+        // Domain
+        const tdDomain = tr.insertCell();
+        tdDomain.className = 'col-domain';
+        tdDomain.textContent = row.domain;
+
+        // Finding + note
+        const tdFinding = tr.insertCell();
+        tdFinding.className = 'col-finding';
+        tdFinding.textContent = row.finding;
+
+        if (isMobile) {
+            // Inline note on mobile
+            const noteEl = document.createElement('div');
+            noteEl.className = 'finding-note-inline';
+            noteEl.textContent = row.note;
+            noteEl.style.display = 'block';
+            tdFinding.appendChild(noteEl);
+        } else {
+            const noteEl = document.createElement('div');
+            noteEl.className = 'finding-note';
+            noteEl.textContent = row.note;
+            tdFinding.appendChild(noteEl);
+        }
+
+        // Direction cells
+        ['trust', 'engagement', 'futureIntent'].forEach(key => {
+            const val = row[key];
+            const td = tr.insertCell();
+            td.className = 'dir-cell';
+            td.style.padding = '1rem';
+
+            let bg, svg;
+            if (val === -1) {
+                bg = 'rgba(196,92,74,0.2)';
+                svg = `<svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 4 L10 16 M4 10 L10 16 L16 10" fill="none" stroke="#c45c4a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            } else if (val === 1) {
+                bg = 'rgba(90,138,106,0.2)';
+                svg = `<svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 16 L10 4 M4 10 L10 4 L16 10" fill="none" stroke="#5a8a6a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            } else {
+                bg = 'rgba(68,68,68,0.2)';
+                svg = `<svg width="20" height="20" viewBox="0 0 20 20"><path d="M4 10 L16 10" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round"/></svg>`;
+            }
+            td.style.background = bg;
+            td.innerHTML = svg;
+        });
+
+        // Source
+        const tdSource = tr.insertCell();
+        tdSource.className = 'col-source';
+        tdSource.textContent = row.sourceLabel;
+    });
+
+    // Fade rows in on scroll
+    function animateRows() {
+        tbody.querySelectorAll('tr').forEach((tr, i) => {
+            tr.style.opacity = 0;
+            tr.style.transition = `opacity 0.5s ease-out ${i * 120}ms`;
+            requestAnimationFrame(() => { tr.style.opacity = 1; });
+        });
+    }
+
+    observeOnce(table.closest('.chart-wrapper'), animateRows);
+})();
+
+// ── CHART 4: Trust Issues Matrix ─────────────────────────────────────────────
+(function buildChart4() {
+    const container = document.getElementById('chart4');
+
+    const columns = [
+        'Accuracy',
+        'Disclosure',
+        'Authorship',
+        'Copyright & Training Data',
+        'Reader Credibility',
+        'Job Displacement',
+    ];
+
+    // high / medium / low / none
+    const rows = [
+        {
+            label: 'Nonfiction',
+            cells: ['high', 'high', 'medium', 'low', 'high', 'none'],
+        },
+        {
+            label: 'Corporate',
+            cells: ['medium', 'medium', 'none', 'medium', 'none', 'high'],
+        },
+        {
+            label: 'Fiction',
+            cells: ['low', 'high', 'high', 'high', 'high', 'none'],
+        },
+    ];
+
+    // Corner header
+    const cornerDiv = document.createElement('div');
+    cornerDiv.className = 'tm-header';
+    container.appendChild(cornerDiv);
+
+    // Column headers
+    columns.forEach(col => {
+        const div = document.createElement('div');
+        div.className = 'tm-header';
+        div.textContent = col;
+        container.appendChild(div);
+    });
+
+    // Data rows
+    rows.forEach(row => {
+        const labelDiv = document.createElement('div');
+        labelDiv.className = 'tm-cell tm-row-label';
+        labelDiv.textContent = row.label;
+        container.appendChild(labelDiv);
+
+        row.cells.forEach(level => {
+            const cell = document.createElement('div');
+            cell.className = 'tm-cell';
+            const dot = document.createElement('span');
+            dot.className = `tm-dot tm-dot-${level}`;
+            cell.appendChild(dot);
+            container.appendChild(cell);
+        });
+    });
+
+    // Fade in rows on scroll
+    function animateMatrix() {
+        const cells = container.querySelectorAll('.tm-cell:not(.tm-row-label)');
+        cells.forEach((c, i) => {
+            c.style.opacity = 0;
+            c.style.transition = `opacity 0.4s ease-out ${i * 30}ms`;
+            requestAnimationFrame(() => { c.style.opacity = 1; });
+        });
+    }
+
+    observeOnce(container.closest('.chart-wrapper'), animateMatrix);
+})();
+
+// ── Scroll reveal (shared) ────────────────────────────────────────────────────
+(function initReveal() {
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                obs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
+
+// Helper: trigger callback once when element enters viewport
+function observeOnce(el, cb) {
+    if (!el) return;
+    const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            cb();
+            obs.disconnect();
+        }
+    }, { threshold: 0.15 });
+    obs.observe(el);
+}
+</script>
+</body>
+</html>
