@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encraftable | Steve Libbey</title>
+    <meta name="description" content="Encraftable — makerspace organizational memory. A React Native iOS prototype for Noisegiftland. Designed by Steve Libbey.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="assets/img/stevelibbey.png">
+    <style>
+        .project-page-header {
+            padding: 3rem 0 2rem;
+        }
+
+        .project-back {
+            display: inline-block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .project-back:hover { color: var(--accent-warm); }
+        .project-back::before { content: '← '; }
+
+        .project-page-header h1 {
+            color: var(--accent-warm);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-page-header .project-tagline {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            max-width: 680px;
+            line-height: 1.6;
+        }
+
+        .project-body {
+            max-width: 760px;
+            margin-top: 3rem;
+        }
+
+        .project-body h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 2.5rem;
+            margin-bottom: 0.5rem;
+            padding-top: 0;
+        }
+
+        .project-body h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 1.75rem;
+            margin-bottom: 0.4rem;
+            padding-top: 0;
+        }
+
+        .project-body p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+
+        .project-body ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-body li {
+            padding-left: 1.4rem;
+            position: relative;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .project-body li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--text);
+            font-size: 0.8rem;
+        }
+
+        .project-status-bar {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2.5rem 0;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .psb-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 0.25rem;
+        }
+
+        .psb-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            margin: 3rem 0;
+        }
+
+        /* Phone screen gallery */
+        .screen-gallery {
+            margin: 2.5rem -2rem 3rem;
+            padding: 2rem 2rem;
+            overflow-x: auto;
+            display: flex;
+            gap: 1rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .screen-gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .screen-gallery figure {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .screen-gallery img {
+            height: 480px;
+            width: auto;
+            border-radius: 24px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            display: block;
+        }
+
+        .screen-gallery figcaption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            text-align: center;
+        }
+
+        .screen-gallery-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 0.75rem;
+        }
+
+        .screen-gallery-hint {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            opacity: 0.55;
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 600px) {
+            .screen-gallery {
+                margin: 2rem -1rem 2.5rem;
+                padding: 1.5rem 1rem;
+            }
+
+            .screen-gallery img {
+                height: 380px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="consulting.html">Consulting</a></li>
+                <li class="nav-dropdown"><a href="#">Works</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="writing.html">Writing</a></li>
+                        <li><a href="music.html">Music</a></li>
+                        <li><a href="art.html">Art</a></li>
+                    </ul>
+                </li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li class="nav-dropdown"><a href="#">CV</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="SteveLibbeyCV.pdf">General</a></li>
+                        <li><a href="SteveLibbeyCV-Healthcare.pdf">Healthcare</a></li>
+                    </ul>
+                </li>
+                <li><a href="mailto:stevelibbey@gmail.com" aria-label="Email" class="email-icon">&#9993;</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <img src="assets/img/stevelibbey.png" alt="Steve Libbey" class="logo logo-static">
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <div class="container">
+        <div class="project-page-header">
+            <a href="projects.html" class="project-back">Projects</a>
+            <div class="case-study-meta" style="margin-bottom: 1rem;">
+                <span class="meta-tag">React Native</span>
+                <span class="meta-tag">Design Systems</span>
+                <span class="meta-tag">Community Tools</span>
+                <span class="meta-tag">2025</span>
+            </div>
+            <h1>Encraftable</h1>
+            <p class="project-tagline">A React Native iOS prototype for makerspace organizational memory — stations, gear, cables, and instructions, so the room works for everyone who walks in, not just the people who already know where everything is.</p>
+        </div>
+
+        <div class="project-status-bar reveal">
+            <div class="psb-item">
+                <div class="psb-label">Platform</div>
+                <div class="psb-value">iOS (React Native)</div>
+            </div>
+            <div class="psb-item">
+                <div class="psb-label">Stack</div>
+                <div class="psb-value">Expo / TypeScript / Expo Router</div>
+            </div>
+            <div class="psb-item">
+                <div class="psb-label">Install</div>
+                <div class="psb-value">Noisegiftland</div>
+            </div>
+            <div class="psb-item">
+                <div class="psb-label">Domain</div>
+                <div class="psb-value">Volunteer-run makerspaces</div>
+            </div>
+        </div>
+
+        <!-- Screen gallery -->
+        <div class="screen-gallery-label reveal">Screens</div>
+        <div class="screen-gallery reveal">
+            <figure>
+                <img src="assets/img/encraftable-screen-home.jpg" alt="Home screen showing room readiness, today's hours, and upcoming events">
+                <figcaption>Home</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/encraftable-screen-stations.jpg" alt="Stations list showing readiness status for each playing position">
+                <figcaption>Stations</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/encraftable-screen-cables.jpg" alt="Cable inventory organized by station assignment">
+                <figcaption>Cables</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/encraftable-screen-issues.jpg" alt="Issues screen listing open and in-progress problems">
+                <figcaption>Issues</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/encraftable-screen-routines.jpg" alt="Routines screen capturing how things are actually done">
+                <figcaption>Routines</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/encraftable-screen-hours.jpg" alt="Hours and events screen with room schedule">
+                <figcaption>Hours &amp; Events</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/encraftable-screen-search.jpg" alt="Search screen showing XLR cable results">
+                <figcaption>Search</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/encraftable-screen-people.jpg" alt="People screen with member presence and roles">
+                <figcaption>People</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/encraftable-screen-guide.jpg" alt="Guide screen with welcome text and space orientation">
+                <figcaption>Guide</figcaption>
+            </figure>
+        </div>
+        <p class="screen-gallery-hint reveal">← scroll to see all screens</p>
+
+        <div class="project-body">
+
+            <h2>The Challenge</h2>
+            <p>Makerspaces run on volunteer stewardship. Equipment gets donated, set up by someone who knows how it works, and maintained by whoever cares enough to show up. When that person moves on — and they always do — what they knew goes with them. The result is a room full of gear that technically works but practically doesn't, because nobody knows the power sequence for the organ, which cable goes where, or who to ask when the mixing board stops responding.</p>
+            <p>Inventory software doesn't solve this. A list of items with condition fields tells you what's there. It doesn't tell you whether the station is actually playable right now, what the setup sequence is for a first-timer, or why there's a note taped to the bass amp that says "don't touch the red knob." The real problem is organizational memory.</p>
+
+            <hr class="section-divider">
+
+            <h2>What I Designed</h2>
+            <p>A mobile app that treats the station — not the individual item — as the primary unit of information. A station is a fully configured playing position: Guitar Station 1, Hammond Station, Recording Station. The question the app answers is not "what gear is in this room" but "can I actually use this station right now, and how do I do it."</p>
+
+            <p>Each station record contains:</p>
+            <ul>
+                <li>A readiness status — Ready, Needs Attention, or Down — with a plain-language explanation</li>
+                <li>A complete gear list with condition and status for each item</li>
+                <li>A cable diagram showing every assigned cable by type, length, label, and condition</li>
+                <li>A prose instruction sheet written for someone who has never touched the equipment</li>
+                <li>A quirks field for accumulated lore that doesn't fit formal documentation</li>
+            </ul>
+
+            <p>Cables are first-class objects, not fields on gear records. A cable has a type, a length, a condition, an assignment, and a physical label that matches the label on the cable itself. The spare bin is a distinct concept — unassigned cables available to borrow — and its contents are surfaced by type on each station detail screen.</p>
+
+            <p>The app also surfaces room hours, recurring events with the stations they use, steward contacts with their areas of expertise, and availability notes for shared equipment.</p>
+
+            <hr class="section-divider">
+
+            <h2>Key Design Decisions</h2>
+
+            <h3>Station as the primary unit, not the item</h3>
+            <p>The instinct in inventory software is to start with the item. I started with the station because that's the unit that matters to the person walking in. A guitarist doesn't care that there's an Ibanez acoustic and a Fender combo amp in the room. They care whether Guitar Station 1 is set up and ready to play. Readiness lives at the station level. Gear and cables are supporting evidence.</p>
+
+            <h3>Cables as first-class objects</h3>
+            <p>Cables are the most common reason a station fails to work. They break, they disappear, they get borrowed and not returned, and nobody notices until someone sits down to play and nothing happens. Making cables a first-class entity — with their own records, conditions, assignments, and a labeled spare bin — turns a chronic invisible problem into a visible, manageable one.</p>
+
+            <h3>Instructions written for the person who has never been here before</h3>
+            <p>Every station has a full prose onboarding sheet: step-by-step, written plainly, covering power sequence, basic settings, and how to leave the station for the next person. These instructions are the thing that survives steward turnover.</p>
+
+            <h3>Honest about partial truth</h3>
+            <p>The app does not normalize incomplete data into false completeness. Bass Station has no bass guitar assigned — the app says so plainly. The turntable signal chain is unverified — the app says that too. Empty states are honest: "No instrument currently assigned to this station." The room is a work in progress and the app reflects that, because pretending otherwise makes the app useless the moment someone relies on it.</p>
+
+            <h3>Component architecture designed for reuse</h3>
+            <p>Screens don't talk directly to the data. Helper functions — getStation, getGearForStation, getCablesForStation, getReadinessCount — sit between the data layer and the UI so new screens don't require new data logic. This is a prototype, but it's built as if it's going to grow.</p>
+
+            <hr class="section-divider">
+
+            <h2>Research Foundation</h2>
+            <p>The Noisegiftland install is grounded in field research on real makerspace failure modes. High member turnover is endemic — spaces grow every month but lose members just as fast because people join without knowing what to do with the equipment and never find their footing. Volunteer burnout is the primary sustainability threat: the person who knows the most tends to carry the most, and when they leave, the knowledge leaves with them.</p>
+            <p>The music room inventory was seeded from the actual Noisebridge staging CSV, with stations posited to reflect the simplified, plug-and-play goal the Music Guild is working toward: two guitar stations, bass, electronic drums, recording, DJ, keyboard, Hammond, and PA. Each station fully configured, cabled, and documented.</p>
+
+            <hr class="section-divider">
+
+            <h2>Design Principle</h2>
+            <p>The room has a lot of knowledge in it. Most of it is in people's heads. The app's job is to move that knowledge from heads to hardware — attached to the physical thing it describes, readable by anyone who walks in, and still there after the person who knew it moves on.</p>
+
+        </div>
+
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="footer-content">
+                <h2><a href="mailto:stevelibbey@gmail.com" class="contact-link">Let's Talk</a></h2>
+                <p>Senior product designer seeking roles in healthcare systems, enterprise analytics, AI-enabled tools, and complex workflow design. Fully remote, based in California.</p>
+                <div class="footer-links">
+                    <a href="mailto:stevelibbey@gmail.com">Email</a>
+                    <a href="https://www.linkedin.com/in/stevelibbey" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="SteveLibbeyCV.pdf">Resume</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
