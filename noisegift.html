@@ -153,6 +153,79 @@
         .principles-list li::before {
             content: '—';
         }
+
+        /* Image gallery */
+        .screen-gallery {
+            margin: 2.5rem -2rem 3rem;
+            padding: 2rem 2rem;
+            overflow-x: auto;
+            display: flex;
+            gap: 1.25rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .screen-gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .screen-gallery figure {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .screen-gallery img {
+            height: 360px;
+            width: auto;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.12);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            display: block;
+        }
+
+        .screen-gallery figcaption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            text-align: center;
+        }
+
+        .screen-gallery-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 0.75rem;
+        }
+
+        .screen-gallery-hint {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            opacity: 0.55;
+            margin-top: -2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .screen-gallery {
+                margin: 2rem -1rem 2.5rem;
+                padding: 1.5rem 1rem;
+            }
+
+            .screen-gallery img {
+                height: 260px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -215,6 +288,24 @@
                 <div class="psb-value">.ngft</div>
             </div>
         </div>
+
+        <!-- Image gallery -->
+        <div class="screen-gallery-label reveal">Reference Material</div>
+        <div class="screen-gallery reveal">
+            <figure>
+                <img src="assets/img/Teleharmonium1897.jpg" alt="The Telharmonium instrument, 1897">
+                <figcaption>The instrument, 1897</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/telharmoniumpatent.webp" alt="Telharmonium patent drawing by Thaddeus Cahill">
+                <figcaption>Cahill patent</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/scientific-american-v96-n10-1907-03-09-1.webp" alt="Scientific American cover, March 9, 1907 — The Telharmonium">
+                <figcaption>Scientific American, March 1907</figcaption>
+            </figure>
+        </div>
+        <p class="screen-gallery-hint reveal">← scroll to see all</p>
 
         <div class="project-body">
 
